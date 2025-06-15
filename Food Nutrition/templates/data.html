@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Type Count Chart</title>
+    <script src="{% static 'js/highcharts.js' %}"></script>
+    <script src="{% static 'js/exporting.js' %}"></script>
+    <script src="{% static 'js/export-data.js' %}"></script>
+</head>
+
+<body>
+    <div id="container" style="width: 800px; height: 400px; margin: 0 auto;"></div>
+    <script>
+        const chartData = {{ chart_data|safe }};
+        Highcharts.chart('container', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: '食品类型数量分析不'
+            },
+            xAxis: {
+                categories: chartData.map(item => item[0])
+            },
+            yAxis: {
+                title: {
+                    text: '数量'
+                }
+            },
+            series: [{
+                name: '数量',
+                data: chartData.map(item => item[1])
+            }]
+        });
+    </script>
+</body>
+
+</html>

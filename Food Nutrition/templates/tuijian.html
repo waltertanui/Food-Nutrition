@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人信息收集 - 食物推荐</title>
+    <!-- 引入Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- 配置Tailwind自定义主题 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#10B981',      // 主色调：绿色
+                        secondary: '#3B82F6',    // 辅助色：蓝色
+                        accent: '#F97316',       // 强调色：橙色
+                        neutral: '#F3F4F6',      // 中性色：浅灰
+                        dark: '#1F2937'          // 深色：深灰
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'card': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
+                        'card-hover': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
+                    }
+                },
+            }
+        }
+    </script>
+
+    <!-- 自定义工具类 -->
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .form-checkbox {
+                @apply w-5 h-5 text-primary border-gray-300 rounded focus:ring-primary;
+            }
+            .form-radio {
+                @apply w-5 h-5 text-primary border-gray-300 focus:ring-primary;
+            }
+            .form-select {
+                @apply block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200;
+            }
+            .form-input {
+                @apply block w-full px-4 py-3 bg-white border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200;
+            }
+            .form-label {
+                @apply block text-sm font-medium text-gray-700 mb-1.5;
+            }
+            .form-section {
+                @apply mb-6;
+            }
+            .form-section-title {
+                @apply text-lg font-semibold text-gray-800 mb-3 flex items-center;
+            }
+            .checkbox-group {
+                @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3;
+            }
+            .checkbox-item {
+                @apply flex items-center space-x-2 p-3 bg-white rounded-lg border border-gray-200 hover:border-primary/50 transition-all duration-200 cursor-pointer;
+            }
+            .checkbox-item input[type="checkbox"] {
+                @apply mt-0;
+            }
+            .input-with-other {
+                @apply flex items-center space-x-2 mt-2;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-green-50 to-blue-50 min-h-screen font-inter text-gray-800">
+    <!-- 页面头部 -->
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-leaf text-primary text-2xl"></i>
+                <h1 class="text-xl font-bold text-gray-800">HealthyPlate</h1>
+            </div>
+            <nav class="hidden md:flex space-x-6">
+                <a href="#" class="text-gray-600 hover:text-primary transition-colors duration-200">首页</a>
+                <a href="#" class="text-gray-600 hover:text-primary transition-colors duration-200">推荐</a>
+                <a href="#" class="text-gray-600 hover:text-primary transition-colors duration-200">营养指南</a>
+                <a href="#" class="text-gray-600 hover:text-primary transition-colors duration-200">关于我们</a>
+            </nav>
+            <button class="md:hidden text-gray-600 text-xl">
+                <i class="fa fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 主要内容 -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- 页面标题 -->
+            <div class="text-center mb-8">
+                <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-gray-800 mb-3">
+                    个性化食物推荐
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    填写以下信息，获取专为您定制的健康饮食建议。我们会根据您的身体状况、偏好和目标，提供最适合您的食物推荐。
+                </p>
+            </div>
+
+            <!-- 表单卡片 -->
+            <div class="bg-white rounded-2xl shadow-card hover:shadow-card-hover transition-all duration-300 overflow-hidden">
+                <!-- 进度指示器 -->
+                <div class="bg-primary text-white p-4">
+                    <div class="flex justify-between items-center">
+                        <h3 class="font-semibold">个人信息收集</h3>
+                        <div class="flex items-center space-x-1">
+                            <span class="w-3 h-3 rounded-full bg-white"></span>
+                            <span class="w-3 h-3 rounded-full bg-white/50"></span>
+                            <span class="w-3 h-3 rounded-full bg-white/50"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 表单内容 -->
+                <form id="food-recommendation-form" class="p-6 md:p-8">
+                    <!-- 基本信息 -->
+                    <div class="form-section">
+                        <h4 class="form-section-title">
+                            <i class="fa fa-user-circle-o text-primary mr-2"></i>
+                            基本信息
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="age" class="form-label">年龄</label>
+                                <select id="age" class="form-select" required>
+                                    <option value="">请选择</option>
+                                    <option value="0 - 12">0 - 12岁</option>
+                                    <option value="13 - 18">13 - 18岁</option>
+                                    <option value="19 - 30">19 - 30岁</option>
+                                    <option value="31 - 50">31 - 50岁</option>
+                                    <option value="51+">51岁及以上</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="gender" class="form-label">性别</label>
+                                <select id="gender" class="form-select" required>
+                                    <option value="">请选择</option>
+                                    <option value="male">男</option>
+                                    <option value="female">女</option>
+                                    <option value="other">其他</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="height" class="form-label">身高（cm）</label>
+                                <select id="height" class="form-select" required>
+                                    <option value="">请选择</option>
+                                    <option value="under_150">150cm以下</option>
+                                    <option value="150_165">150 - 165cm</option>
+                                    <option value="166_180">166 - 180cm</option>
+                                    <option value="181_200">181 - 200cm</option>
+                                    <option value="over_200">200cm以上</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="weight" class="form-label">体重（kg）</label>
+                                <select id="weight" class="form-select" required>
+                                    <option value="">请选择</option>
+                                    <option value="under_40">40kg以下</option>
+                                    <option value="40_55">40 - 55kg</option>
+                                    <option value="56_70">56 - 70kg</option>
+                                    <option value="71_90">71 - 90kg</option>
+                                    <option value="over_90">90kg以上</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 健康信息 -->
+                    <div class="form-section">
+                        <h4 class="form-section-title">
+                            <i class="fa fa-medkit text-primary mr-2"></i>
+                            健康信息
+                        </h4>
+                        <div>
+                            <label class="form-label">过敏信息</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="allergy-nuts" value="nuts">
+                                    <label for="allergy-nuts" class="cursor-pointer">坚果</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="allergy-dairy" value="dairy">
+                                    <label for="allergy-dairy" class="cursor-pointer">乳制品</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="allergy-gluten" value="gluten">
+                                    <label for="allergy-gluten" class="cursor-pointer">麸质</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="allergy-seafood" value="seafood">
+                                    <label for="allergy-seafood" class="cursor-pointer">海鲜</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="allergy-other" value="other">
+                                    <label for="allergy-other" class="cursor-pointer">其他</label>
+                                </div>
+                            </div>
+                            <div id="allergy-other-container" class="hidden mt-2">
+                                <input type="text" id="allergy-other-text" placeholder="请注明其他过敏信息" class="form-input">
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <label class="form-label">健康状况</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="health-normal" value="normal">
+                                    <label for="health-normal" class="cursor-pointer">健康，无特殊状况</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="health-diabetes" value="diabetes">
+                                    <label for="health-diabetes" class="cursor-pointer">糖尿病</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="health-hypertension" value="hypertension">
+                                    <label for="health-hypertension" class="cursor-pointer">高血压</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="health-heart-disease" value="heart-disease">
+                                    <label for="health-heart-disease" class="cursor-pointer">心脏病</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="health-other" value="other">
+                                    <label for="health-other" class="cursor-pointer">其他</label>
+                                </div>
+                            </div>
+                            <div id="health-other-container" class="hidden mt-2">
+                                <input type="text" id="health-other-text" placeholder="请注明其他健康状况" class="form-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 饮食偏好 -->
+                    <div class="form-section">
+                        <h4 class="form-section-title">
+                            <i class="fa fa-cutlery text-primary mr-2"></i>
+                            饮食偏好
+                        </h4>
+                        <div>
+                            <label class="form-label">偏好食物</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="favorite-meat" value="meat">
+                                    <label for="favorite-meat" class="cursor-pointer">肉类</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="favorite-vegetables" value="vegetables">
+                                    <label for="favorite-vegetables" class="cursor-pointer">蔬菜</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="favorite-fruits" value="fruits">
+                                    <label for="favorite-fruits" class="cursor-pointer">水果</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="favorite-grains" value="grains">
+                                    <label for="favorite-grains" class="cursor-pointer">谷物</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="favorite-snacks" value="snacks">
+                                    <label for="favorite-snacks" class="cursor-pointer">零食</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="favorite-other-food" value="other">
+                                    <label for="favorite-other-food" class="cursor-pointer">其他</label>
+                                </div>
+                            </div>
+                            <div id="favorite-other-food-container" class="hidden mt-2">
+                                <input type="text" id="favorite-other-food-text" placeholder="请注明其他偏好食物" class="form-input">
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <label class="form-label">饮食限制</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="diet-vegetarian" value="vegetarian">
+                                    <label for="diet-vegetarian" class="cursor-pointer">素食主义</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="diet-vegan" value="vegan">
+                                    <label for="diet-vegan" class="cursor-pointer">纯素食主义</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="diet-low-salt" value="low-salt">
+                                    <label for="diet-low-salt" class="cursor-pointer">低盐饮食</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="diet-low-fat" value="low-fat">
+                                    <label for="diet-low-fat" class="cursor-pointer">低脂饮食</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="diet-other-restriction" value="other">
+                                    <label for="diet-other-restriction" class="cursor-pointer">其他</label>
+                                </div>
+                            </div>
+                            <div id="diet-other-restriction-container" class="hidden mt-2">
+                                <input type="text" id="diet-other-restriction-text" placeholder="请注明其他饮食限制" class="form-input">
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <label class="form-label">口味偏好</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="taste-sweet" value="sweet">
+                                    <label for="taste-sweet" class="cursor-pointer">甜</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="taste-salty" value="salty">
+                                    <label for="taste-salty" class="cursor-pointer">咸</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="taste-sour" value="sour">
+                                    <label for="taste-sour" class="cursor-pointer">酸</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="taste-spicy" value="spicy">
+                                    <label for="taste-spicy" class="cursor-pointer">辣</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="taste-bitter" value="bitter">
+                                    <label for="taste-bitter" class="cursor-pointer">苦</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="taste-other-taste" value="other">
+                                    <label for="taste-other-taste" class="cursor-pointer">其他</label>
+                                </div>
+                            </div>
+                            <div id="taste-other-taste-container" class="hidden mt-2">
+                                <input type="text" id="taste-other-taste-text" placeholder="请注明其他口味偏好" class="form-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 生活习惯 -->
+                    <div class="form-section">
+                        <h4 class="form-section-title">
+                            <i class="fa fa-heartbeat text-primary mr-2"></i>
+                            生活习惯
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="exercise-frequency" class="form-label">运动频率</label>
+                                <select id="exercise-frequency" class="form-select" required>
+                                    <option value="">请选择</option>
+                                    <option value="never">从不</option>
+                                    <option value="rarely">很少（每周1 - 2次）</option>
+                                    <option value="sometimes">有时（每周3 - 4次）</option>
+                                    <option value="often">经常（每周5 - 6次）</option>
+                                    <option value="always">总是（每天）</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="sleep-hours" class="form-label">睡眠时间（小时）</label>
+                                <select id="sleep-hours" class="form-select" required>
+                                    <option value="">请选择</option>
+                                    <option value="under_6">6小时以下</option>
+                                    <option value="6_7">6 - 7小时</option>
+                                    <option value="7_8">7 - 8小时</option>
+                                    <option value="8_9">8 - 9小时</option>
+                                    <option value="over_9">9小时以上</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <label class="form-label">健康目标</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="health-goal-weight-loss" value="weight-loss">
+                                    <label for="health-goal-weight-loss" class="cursor-pointer">减重</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="health-goal-weight-gain" value="weight-gain">
+                                    <label for="health-goal-weight-gain" class="cursor-pointer">增重</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="health-goal-improve-health" value="improve-health">
+                                    <label for="health-goal-improve-health" class="cursor-pointer">改善健康状况</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="health-goal-other-goal" value="other">
+                                    <label for="health-goal-other-goal" class="cursor-pointer">其他</label>
+                                </div>
+                            </div>
+                            <div id="health-goal-other-goal-container" class="hidden mt-2">
+                                <input type="text" id="health-goal-other-goal-text" placeholder="请注明其他健康目标" class="form-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 提交按钮 -->
+                    <div class="flex justify-center mt-8">
+                        <button type="submit" id="submit-button" class="px-8 py-3 bg-primary hover:bg-primary/90 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-1 flex items-center">
+                            <i class="fa fa-leaf mr-2"></i>
+                            获取个性化推荐
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-800 text-white mt-12 py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">HealthyPlate</h4>
+                    <p class="text-gray-400 text-sm">
+                        基于科学数据的个性化食物推荐平台，帮助您做出更健康的饮食选择。
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">快速链接</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-primary transition-colors duration-200">首页</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors duration-200">食物推荐</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors duration-200">营养指南</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors duration-200">关于我们</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">联系我们</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center"><i class="fa fa-envelope-o mr-2"></i> contact@healthyplate.com</li>
+                        <li class="flex items-center"><i class="fa fa-phone mr-2"></i> +86 123 4567 8910</li>
+                        <li class="flex items-center"><i class="fa fa-map-marker mr-2"></i> 北京市海淀区中关村大街</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">关注我们</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition-colors duration-200">
+                            <i class="fa fa-weixin"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition-colors duration-200">
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-700 flex items-center justify-center hover:bg-primary transition-colors duration-200">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+                    </div>
+                    <p class="text-gray-400 text-sm mt-4">
+                        订阅我们的健康资讯
+                    </p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="您的邮箱" class="px-3 py-2 bg-gray-700 text-white rounded-l-lg focus:outline-none focus:ring-1 focus:ring-primary">
+                        <button class="bg-primary hover:bg-primary/90 text-white px-3 py-2 rounded-r-lg transition-colors duration-200">
+                            订阅
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400 text-sm">
+                <p>© 2023 HealthyPlate. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 显示/隐藏"其他"选项的文本框
+        function setupOtherFieldToggle(checkboxId, containerId) {
+            const checkbox = document.getElementById(checkboxId);
+            const container = document.getElementById(containerId);
+
+            if (checkbox && container) {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        container.classList.remove('hidden');
+                        // 如果是输入框，自动聚焦
+                        const input = container.querySelector('input');
+                        if (input) input.focus();
+                    } else {
+                        container.classList.add('hidden');
+                        // 取消选择时清空输入
+                        const input = container.querySelector('input');
+                        if (input) input.value = '';
+                    }
+                });
+            }
+        }
+
+        // 设置所有"其他"选项的切换功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化其他字段的显示/隐藏
+            setupOtherFieldToggle('allergy-other', 'allergy-other-container');
+            setupOtherFieldToggle('health-other', 'health-other-container');
+            setupOtherFieldToggle('favorite-other-food', 'favorite-other-food-container');
+            setupOtherFieldToggle('diet-other-restriction', 'diet-other-restriction-container');
+            setupOtherFieldToggle('taste-other-taste', 'taste-other-taste-container');
+            setupOtherFieldToggle('health-goal-other-goal', 'health-goal-other-goal-container');
+
+            // 表单提交处理
+            const form = document.getElementById('food-recommendation-form');
+            const submitButton = document.getElementById('submit-button');
+
+            if (form && submitButton) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    // 显示加载状态
+                    submitButton.disabled = true;
+                    submitButton.innerHTML = '<i class="fa fa-spinner fa-spin mr-2"></i> 处理中...';
+
+                    // 模拟表单提交
+                    setTimeout(function() {
+                        // 显示成功消息（实际应用中应该替换为实际的提交逻辑）
+                        alert('表单已提交！正在为您生成个性化食物推荐...');
+
+                        // 重置按钮状态
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = '<i class="fa fa-leaf mr-2"></i> 获取个性化推荐';
+                    }, 1500);
+                });
+            }
+
+            // 添加表单元素的动画效果
+            const formElements = document.querySelectorAll('select, input[type="checkbox"]');
+            formElements.forEach(el => {
+                el.addEventListener('focus', function() {
+                    this.parentElement.classList.add('ring-2', 'ring-primary/30', 'rounded-lg');
+                });
+                el.addEventListener('blur', function() {
+                    this.parentElement.classList.remove('ring-2', 'ring-primary/30', 'rounded-lg');
+                });
+            });
+
+            // 添加页面滚动时的导航栏效果
+            const header = document.querySelector('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 10) {
+                    header.classList.add('shadow-md');
+                } else {
+                    header.classList.remove('shadow-md');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

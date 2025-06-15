@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <title>登录</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description" content="">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- FontAwesome JS-->
+    <script defer src="/static/plugins/fontawesome/js/all.min.js"></script>
+
+    <!-- App CSS -->
+    <link id="theme-style" rel="stylesheet" href="/static/css/portal.css">
+
+</head>
+
+<body class="app app-login p-0">
+    <!-- 添加提示框样式 -->
+    <style>
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            background-color: #4CAF50; /* 绿色背景 */
+            color: white;
+            padding: 15px;
+            border-radius: 4px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+
+    <!-- 提示框元素 -->
+    <div id="toast" class="toast">注册成功！请登录</div>
+
+    <!-- 原有表单代码保持不变 -->
+
+    <div class="row g-0 app-auth-wrapper">
+	    <div class="col-12 col-md-7 col-lg-6 auth-main-col text-center p-5">
+		    <div class="d-flex flex-column align-content-end">
+
+				<div class="app-auth-body mx-auto">
+
+
+				    <div class="app-auth-branding mb-4"><a class="app-logo" href="/myApp/index"><img class="logo-icon" src="/static/images/logo.png" alt="logo"></a></div>
+					<h2 >登录</h2>
+
+                    <br>
+			        <div class="auth-form-container text-left">
+						<form class="auth-form login-form" method="post">
+							  {% csrf_token %}
+							<div class="email mb-3">
+								<label class="sr-only" for="signup-name">Your Name</label>
+								<input id="signup-name" name="username" type="text" class="form-control signup-name" placeholder="用户名" required="required">
+							</div>
+							<div class="password mb-3">
+								<label class="sr-only" for="signin-password">Password</label>
+								<input id="signin-password" name="password" type="password" class="form-control signin-password" placeholder="密码" required="required">
+								<div class="extra mt-3 row justify-content-between">
+									<div class="col-6">
+
+									</div><!--//col-6-->
+									<div class="col-6">
+										<div class="forgot-password text-right">
+											<a href="reset-password.html">忘记密码？</a>
+										</div>
+									</div><!--//col-6-->
+								</div><!--//extra-->
+							</div><!--//form-group-->{% if messages %}
+                    <ul class="messages" style="list-style: none;">
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                     </ul>
+                    {% endif %}
+							<div class="text-center">
+								<button type="submit" class="btn app-btn-primary btn-block theme-btn mx-auto">登录</button>
+							</div>
+						</form>
+
+						<div class="auth-option text-center pt-5">没有账户？ <a class="text-link" href="/myApp/signup" >在此处</a>注册</div>
+					</div><!--//auth-form-container-->
+
+			    </div><!--//auth-body-->
+
+			    <footer class="app-auth-footer">
+				    <div class="container text-center py-3">
+				         <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
+			        <small class="copyright">Copyright © 2025.食品营养数据分析 All rights reserved. </a></small>
+
+				    </div>
+			    </footer><!--//app-auth-footer-->
+		    </div><!--//flex-column-->
+	    </div><!--//auth-main-col-->
+	    <div class="col-12 col-md-5 col-lg-6 h-100 auth-background-col">
+		    <div class="auth-background-holder">
+		    </div>
+		    <div class="auth-background-mask"></div>
+		    <div class="auth-background-overlay p-3 p-lg-5">
+			    <div class="d-flex flex-column align-content-end h-100">
+				    <div class="h-100"></div>
+				    <div class="overlay-content p-3 p-lg-4 rounded">
+					    <h5 class="mb-3 overlay-title">踏上食物探索之旅，开启美味新发现！</h5>
+					    <div>返回<a href="/myApp/index">首页</a>.</div>
+				    </div>
+				</div>
+		    </div><!--//auth-background-overlay-->
+	    </div><!--//auth-background-col-->
+
+    </div><!--//row-->
+
+
+ <script>
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取URL参数
+            const urlParams = new URLSearchParams(window.location.search);
+
+            // 如果存在success参数，显示成功提示框
+            if (urlParams.get('success') === '1') {
+                showToast();
+
+                // 移除URL中的参数，避免刷新后再次显示
+                history.replaceState(null, null, window.location.pathname);
+            }
+        });
+
+        // 显示提示框函数
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+
+            // 3秒后自动隐藏
+            setTimeout(function() {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
+

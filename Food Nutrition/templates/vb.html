@@ -1,0 +1,162 @@
+
+以下是参考图中食谱表样式，使用HTML和CSS实现的代码，呈现出类似的每周健康食谱表，你可以根据实际需求修改食物内容：
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每周健康食谱表</title>
+    <style>
+        /* 全局样式 */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 容器样式 */
+        .container {
+            width: 80%;
+            margin: 40px auto;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* 标题样式 */
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* 表格样式 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #e0e0e0;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #e0f2f1;
+            color: #333;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* 图标样式 */
+        .icon {
+            width: 30px;
+            height: 30px;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>每周健康食谱表</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th><img class="icon" src="https://img.icons8.com/fluency-systems-filled/30/000000/meal.png" />
+                    </th>
+                    <th colspan="3">早餐</th>
+                    <th>水果</th>
+                    <th colspan="3">午餐</th>
+                    <th colspan="2">晚餐</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th>主食</th>
+                    <th>菜</th>
+                    <th>营养搭配</th>
+                    <th></th>
+                    <th>主食</th>
+                    <th>菜</th>
+                    <th>汤</th>
+                    <th>主食</th>
+                    <th>菜</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>周一</td>
+                    <td>杂粮馒头</td>
+                    <td>清炒豆芽</td>
+                    <td>鸡蛋, 豆浆</td>
+                    <td>香蕉</td>
+                    <td>大米饭</td>
+                    <td>红烧肉, 清炒小白菜</td>
+                    <td>番茄蛋汤</td>
+                    <td>馅饼</td>
+                    <td>丸子汤</td>
+                </tr>
+                <tr>
+                    <td>周二</td>
+                    <td>青菜肉丝面</td>
+                    <td>酱菜</td>
+                    <td>酸奶</td>
+                    <td>火龙果</td>
+                    <td>糙米饭</td>
+                    <td>红苋菜, 农家小炒肉</td>
+                    <td></td>
+                    <td>炸酱面</td>
+                    <td>青菜</td>
+                </tr>
+                <tr>
+                    <td>周三</td>
+                    <td>皮蛋瘦肉粥</td>
+                    <td></td>
+                    <td>玉米, 紫薯</td>
+                    <td>芒果</td>
+                    <td>大米饭</td>
+                    <td>番茄牛腩, 空心菜</td>
+                    <td>青菜汤</td>
+                    <td>饺子</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>周四</td>
+                    <td>番茄鸡蛋面</td>
+                    <td></td>
+                    <td>牛奶</td>
+                    <td>西瓜</td>
+                    <td>糙米饭</td>
+                    <td>油淋茄子, 回锅肉</td>
+                    <td>紫菜蛋汤</td>
+                    <td>馒头</td>
+                    <td>麻婆豆腐, 香辣虾</td>
+                </tr>
+                <tr>
+                    <td>周五</td>
+                    <td>包子</td>
+                    <td>凉拌海带丝</td>
+                    <td>鸡蛋, 豆浆</td>
+                    <td>苹果</td>
+                    <td>大米饭</td>
+                    <td>油麦菜, 酸辣藕丁</td>
+                    <td>排骨汤</td>
+                    <td>大米粥</td>
+                    <td>口水鸡, 小白菜</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

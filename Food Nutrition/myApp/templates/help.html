@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <title>营养问答</title>
+    
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
+    <link rel="shortcut icon" href="favicon.ico"> 
+    
+    <!-- FontAwesome JS-->
+    <script defer src="/static/plugins/fontawesome/js/all.min.js"></script>
+    
+    <!-- App CSS -->  
+    <link id="theme-style" rel="stylesheet" href="/static/css/portal.css">
+
+</head> 
+
+<body class="app">   	
+        <header class="app-header fixed-top">
+        <div class="app-header-inner">
+	        <div class="container-fluid py-2">
+		        <div class="app-header-content">
+		            <div class="row justify-content-between align-items-center">
+
+				    <div class="col-auto">
+					    <a id="sidepanel-toggler" class="sidepanel-toggler d-inline-block d-xl-none" href="#">
+						    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="img"><title>Menu</title><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg>
+					    </a>
+				    </div><!--//col-->
+		            <div class="search-mobile-trigger d-sm-none col">
+			            <i class="search-mobile-trigger-icon fas fa-search"></i>
+			        </div><!--//col-->
+		            <div class="app-search-box col">
+		                <form class="app-search-form">
+							<input type="text" placeholder="请输入食物名称" name="search" class="form-control search-input">
+							<button type="submit" class="btn search-btn btn-primary" value="Search"><i class="fas fa-search"></i></button>
+				        </form>
+		            </div><!--//app-search-box-->
+
+		            <div class="app-utilities col-auto">
+			            <div class="app-utility-item app-notifications-dropdown dropdown">
+				            <a class="dropdown-toggle no-toggle-arrow" id="notifications-dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false" title="Notifications">
+
+  <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2z"/>
+  <path fill-rule="evenodd" d="M8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
+</svg>
+
+					        </a><!--//dropdown-toggle-->
+
+					        <div class="dropdown-menu p-0" aria-labelledby="notifications-dropdown-toggle">
+					            <div class="dropdown-menu-header p-3">
+						            <h5 class="dropdown-menu-title mb-0">Notifications</h5>
+						        </div><!--//dropdown-menu-title-->
+						        <div class="dropdown-menu-content">
+							       <div class="item p-3">
+								        <div class="row gx-2 justify-content-between align-items-center">
+									        <div class="col-auto">
+										       <img class="profile-image" src="/static/images/profiles/profile-1.png" alt="">
+									        </div><!--//col-->
+									        <div class="col">
+										        <div class="info">
+											        <div class="desc">Amy shared a file with you. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </div>
+											        <div class="meta"> 2 hrs ago</div>
+										        </div>
+									        </div><!--//col-->
+								        </div><!--//row-->
+								        <a class="link-mask" href="notifications.html"></a>
+							       </div><!--//item-->
+							       <div class="item p-3">
+								        <div class="row gx-2 justify-content-between align-items-center">
+									        <div class="col-auto">
+										        <div class="app-icon-holder">
+											        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-receipt" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+	  <path fill-rule="evenodd" d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27zm.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0l-.509-.51z"/>
+	  <path fill-rule="evenodd" d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z"/>
+	</svg>
+										        </div>
+									        </div><!--//col-->
+									        <div class="col">
+										        <div class="info">
+											        <div class="desc">You have a new invoice. Proin venenatis interdum est.</div>
+											        <div class="meta"> 1 day ago</div>
+										        </div>
+									        </div><!--//col-->
+								        </div><!--//row-->
+								        <a class="link-mask" href="notifications.html"></a>
+							       </div><!--//item-->
+							       <div class="item p-3">
+								        <div class="row gx-2 justify-content-between align-items-center">
+									        <div class="col-auto">
+										        <div class="app-icon-holder icon-holder-mono">
+											        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bar-chart-line" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2zm1 12h2V2h-2v12zm-3 0V7H7v7h2zm-5 0v-3H2v3h2z"/>
+</svg>
+										        </div>
+									        </div><!--//col-->
+									        <div class="col">
+										        <div class="info">
+											        <div class="desc">Your report is ready. Proin venenatis interdum est.</div>
+											        <div class="meta"> 3 days ago</div>
+										        </div>
+									        </div><!--//col-->
+								        </div><!--//row-->
+								        <a class="link-mask" href="notifications.html"></a>
+							       </div><!--//item-->
+							       <div class="item p-3">
+								        <div class="row gx-2 justify-content-between align-items-center">
+									        <div class="col-auto">
+										       <img class="profile-image" src="/static/images/profiles/profile-2.png" alt="">
+									        </div><!--//col-->
+									        <div class="col">
+										        <div class="info">
+											        <div class="desc">James sent you a new message.</div>
+											        <div class="meta"> 7 days ago</div>
+										        </div>
+									        </div><!--//col-->
+								        </div><!--//row-->
+								        <a class="link-mask" href="notifications.html"></a>
+							       </div><!--//item-->
+						        </div><!--//dropdown-menu-content-->
+
+						        <div class="dropdown-menu-footer p-2 text-center">
+							        <a href="notifications.html">View all</a>
+						        </div>
+
+							</div><!--//dropdown-menu-->
+				        </div><!--//app-utility-item-->
+			            <div class="app-utility-item">
+				            <a href="/myApp/account" title="Settings">
+
+					            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-gear icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M8.837 1.626c-.246-.835-1.428-.835-1.674 0l-.094.319A1.873 1.873 0 0 1 4.377 3.06l-.292-.16c-.764-.415-1.6.42-1.184 1.185l.159.292a1.873 1.873 0 0 1-1.115 2.692l-.319.094c-.835.246-.835 1.428 0 1.674l.319.094a1.873 1.873 0 0 1 1.115 2.693l-.16.291c-.415.764.42 1.6 1.185 1.184l.292-.159a1.873 1.873 0 0 1 2.692 1.116l.094.318c.246.835 1.428.835 1.674 0l.094-.319a1.873 1.873 0 0 1 2.693-1.115l.291.16c.764.415 1.6-.42 1.184-1.185l-.159-.291a1.873 1.873 0 0 1 1.116-2.693l.318-.094c.835-.246.835-1.428 0-1.674l-.319-.094a1.873 1.873 0 0 1-1.115-2.692l.16-.292c.415-.764-.42-1.6-1.185-1.184l-.291.159A1.873 1.873 0 0 1 8.93 1.945l-.094-.319zm-2.633-.283c.527-1.79 3.065-1.79 3.592 0l.094.319a.873.873 0 0 0 1.255.52l.292-.16c1.64-.892 3.434.901 2.54 2.541l-.159.292a.873.873 0 0 0 .52 1.255l.319.094c1.79.527 1.79 3.065 0 3.592l-.319.094a.873.873 0 0 0-.52 1.255l.16.292c.893 1.64-.902 3.434-2.541 2.54l-.292-.159a.873.873 0 0 0-1.255.52l-.094.319c-.527 1.79-3.065 1.79-3.592 0l-.094-.319a.873.873 0 0 0-1.255-.52l-.292.16c-1.64.893-3.433-.902-2.54-2.541l.159-.292a.873.873 0 0 0-.52-1.255l-.319-.094c-1.79-.527-1.79-3.065 0-3.592l.319-.094a.873.873 0 0 0 .52-1.255l-.16-.292c-.892-1.64.902-3.433 2.541-2.54l.292.159a.873.873 0 0 0 1.255-.52l.094-.319z"/>
+  <path fill-rule="evenodd" d="M8 5.754a2.246 2.246 0 1 0 0 4.492 2.246 2.246 0 0 0 0-4.492zM4.754 8a3.246 3.246 0 1 1 6.492 0 3.246 3.246 0 0 1-6.492 0z"/>
+</svg>
+					        </a>
+					    </div><!--//app-utility-item-->
+
+			            <div class="app-utility-item app-user-dropdown dropdown">
+				            <a class="dropdown-toggle" id="user-dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="/media/{{ userinfo.avatar }}" alt="user profile"></a>
+				            <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
+								<li><a class="dropdown-item" href="/myApp/account">我的</a></li>
+								<hr>
+								<li><a class="dropdown-item" href="/myApp/logout">退出登录</a></li>
+							</ul>
+			            </div><!--//app-user-dropdown-->
+		            </div><!--//app-utilities-->
+		        </div><!--//row-->
+	            </div><!--//app-header-content-->
+	        </div><!--//container-fluid-->
+        </div><!--//app-header-inner-->
+        <div id="app-sidepanel" class="app-sidepanel">
+	        <div id="sidepanel-drop" class="sidepanel-drop"></div>
+	        <div class="sidepanel-inner d-flex flex-column">
+		        <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
+		        <div class="app-branding">
+		            <a class="app-logo" href="/myApp/index"><img class="logo-icon mr-2" src="/static/images/logo.png" alt="logo"><span class="logo-text">食品营养数据分析</span></a>
+
+		        </div><!--//app-branding-->
+
+			    <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
+				    <ul class="app-menu list-unstyled accordion" id="menu-accordion">
+					    <li class="nav-item">
+
+					        <a class="nav-link" href="/myApp/index">
+						        <span class="nav-icon">
+						        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house-door" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+		  <path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 .146.354v7a.5.5 0 0 1-.5.5H9.5a.5.5 0 0 1-.5-.5v-4H7v4a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .146-.354l6-6zM2.5 7.707V14H6v-4a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v4h3.5V7.707L8 2.207l-5.5 5.5z"/>
+		  <path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+		</svg>
+						         </span>
+		                         <span class="nav-link-text">首页</span>
+					        </a><!--//nav-link-->
+					    </li><!--//nav-item-->
+					 <!--//nav-item-->
+					    <li class="nav-item">
+
+					        <a class="nav-link" href="/myApp/foodCategory">
+						        <span class="nav-icon">
+						        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+  <path fill-rule="evenodd" d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z"/>
+  <circle cx="3.5" cy="5.5" r=".5"/>
+  <circle cx="3.5" cy="8" r=".5"/>
+  <circle cx="3.5" cy="10.5" r=".5"/>
+</svg>
+						         </span>
+		                         <span class="nav-link-text">食品类别</span>
+					        </a><!--//nav-link-->
+					    </li><!--//nav-item-->
+					    <li class="nav-item has-submenu">
+
+					        <a class="nav-link submenu-toggle" href="/myApp/foodData" data-toggle="collapse" data-target="#submenu-1" aria-expanded="false" aria-controls="submenu-1">
+						        <span class="nav-icon">
+
+						        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-files" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+	  <path fill-rule="evenodd" d="M4 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4z"/>
+	  <path d="M6 0h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2v-1a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1H4a2 2 0 0 1 2-2z"/>
+	</svg>
+						         </span>
+		                         <span class="nav-link-text">食品成分</span>
+		                         <span class="submenu-arrow">
+
+	                             </span><!--//submenu-arrow-->
+					        </a><!--//nav-link-->
+
+					    </li><!--//nav-item-->
+					    <li class="nav-item has-submenu">
+
+					        <a class="nav-link submenu-toggle" href="/myApp/charts" data-toggle="collapse" data-target="#submenu-2" aria-expanded="false" aria-controls="submenu-2">
+						        <span class="nav-icon">
+
+
+						         </span>
+								  <span class="nav-icon">
+						        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bar-chart-line" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+	  <path fill-rule="evenodd" d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2zm1 12h2V2h-2v12zm-3 0V7H7v7h2zm-5 0v-3H2v3h2z"/>
+	</svg></span>
+		                         <span class="nav-link-text">营养图表</span>
+
+
+					        </a>
+
+
+
+					    <li class="nav-item">
+
+					        <a class="nav-link" href="/myApp/recommend">
+                                 <span class="nav-icon">
+                                 </span>
+								<span class="nav-icon">
+								 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-columns-gap" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+	  <path fill-rule="evenodd" d="M6 1H1v3h5V1zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1zm14 12h-5v3h5v-3zm-5-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-5zM6 8H1v7h5V8zM1 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H1zm14-6h-5v7h5V1zm-5-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1h-5z"/>
+	</svg></span>
+		                         <span class="nav-link-text">个性化推荐</span>
+					        </a><!--//nav-link-->
+					    </li><!--//nav-item-->
+
+					    <li class="nav-item">
+
+					        <a class="nav-link active" href="/myApp/help">
+						        <span class="nav-icon">
+						        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+  <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+</svg>
+						         </span>
+		                         <span class="nav-link-text">营养问答</span>
+					        </a><!--//nav-link-->
+					    </li><!--//nav-item-->
+				    </ul><!--//app-menu-->
+			    </nav><!--//app-nav-->
+			    <div class="app-sidepanel-footer">
+				    <nav class="app-nav app-nav-footer">
+					    <ul class="app-menu footer-menu list-unstyled">
+
+
+						    </li><!--//nav-item-->
+						    <li class="nav-item">
+
+						        <a class="nav-link" href="/myApp/account">
+							        <span class="nav-icon">
+							            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+	  <path fill-rule="evenodd" d="M12 1H4a1 1 0 0 0-1 1v10.755S4 11 8 11s5 1.755 5 1.755V2a1 1 0 0 0-1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z"/>
+	  <path fill-rule="evenodd" d="M8 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+	</svg>
+							        </span>
+			                        <span class="nav-link-text">个人页面</span>
+
+						        </a>
+								<br><!--//nav-link-->
+						    </li><!--//nav-item-->
+					    </ul><!--//footer-menu-->
+				    </nav>
+			    </div><!--//app-sidepanel-footer-->
+
+	        </div><!--//sidepanel-inner-->
+	    </div><!--//app-sidepanel-->
+    </header><!--//app-header-->
+
+    <div class="app-wrapper">
+
+	    <div class="app-content pt-3 p-md-3 p-lg-4">
+		    <div class="container-xl">
+
+			    <h1 class="app-page-title">营养问答</h1>
+                <div class="app-card app-card-accordion shadow-sm mb-4">
+				    <div class="app-card-header p-4 pb-2  border-0">
+				       <h4 class="app-card-title">问题</h4>
+				    </div><!--//app-card-header-->
+				    <div class="app-card-body p-4 pt-0">
+					    <div id="faq1-accordion" class="faq1-accordion faq-accordion accordion">
+                            <div class="card">
+                                <div class="card-header" id="faq1-heading-1">
+                                    <h4 class="card-title">
+
+                                        <button class="card-toggle btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#faq1-1" aria-expanded="false" aria-controls="faq1-1"><span class="pe-icon pe-7s-plus"></span>为什么要多吃蔬菜？</button>
+                                    </h4>
+                                </div>
+                                <div class="panel-collapse collapse" id="faq1-1" aria-labelledby="faq1-heading-1" data-parent="#faq1-accordion">
+                                    <div class="card-body">
+                                        蔬菜富含维生素、矿物质、膳食纤维和植物化学物等营养成分。例如，维生素 C、维生素 K、叶酸、钾等在蔬菜中含量丰富。维生素 C 有助于增强免疫力，促进铁的吸收；维生素 K 对血液凝固和骨骼健康很重要；叶酸对于细胞分裂和胎儿发育至关重要；钾有助于维持正常的心跳和血压。膳食纤维则可以促进肠道蠕动，预防便秘，降低心血管疾病等慢性疾病的风险。此外，蔬菜中的植物化学物如类胡萝卜素、花青素等具有抗氧化、抗炎等作用，对身体健康有益。
+                                    </div>
+                                </div>
+                            </div>
+                            <!--//card-->
+                            <div class="card">
+                                <div class="card-header" id="faq1-heading-2">
+                                    <h4 class="card-title">
+
+                                        <button class="card-toggle btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#faq1-2" aria-expanded="false" aria-controls="faq1-2"><span class="pe-icon pe-7s-plus"></span>蛋白质对人体有什么作用？</button>
+                                    </h4>
+                                </div>
+                                <div class="panel-collapse collapse" id="faq1-2" aria-labelledby="faq1-heading-2" data-parent="#faq1-accordion">
+                                    <div class="card-body">
+                                        蛋白质是生命的物质基础，在人体中发挥着多种重要作用。首先，它是构成身体组织和器官的基本成分，如肌肉、骨骼、皮肤、毛发、指甲等都含有大量的蛋白质。其次，蛋白质参与身体的各种生理功能，如酶是一类特殊的蛋白质，能够催化体内的化学反应；激素也是蛋白质或肽类物质，对身体的生长、发育、代谢等过程起着调节作用；抗体是免疫系统中的重要蛋白质，能够识别和抵御外来病原体。此外，蛋白质还可以提供能量，当身体摄入的能量不足时，蛋白质可以通过代谢分解为身体提供能量。
+                                    </div>
+                                </div>
+                            </div>
+                            <!--//card-->
+                            <div class="card">
+                                <div class="card-header" id="faq1-heading-3">
+                                    <h4 class="card-title">
+
+                                        <button class="card-toggle btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#faq1-3" aria-expanded="false" aria-controls="faq1-3"><span class="pe-icon pe-7s-plus"></span>如何选择健康的脂肪？</button>
+                                    </h4>
+                                </div>
+                                <div class="panel-collapse collapse" id="faq1-3" aria-labelledby="faq1-heading-3" data-parent="#faq1-accordion">
+                                    <div class="card-body">
+                                        选择健康的脂肪应优先考虑不饱和脂肪，包括单不饱和脂肪和多不饱和脂肪。富含单不饱和脂肪的食物有橄榄油、菜籽油、坚果（如杏仁、腰果、巴旦木）等，这类脂肪有助于降低坏胆固醇（低密度脂蛋白胆固醇）水平，同时维持好胆固醇（高密度脂蛋白胆固醇）水平，对心血管健康有益。富含多不饱和脂肪的食物有深海鱼类（如三文鱼、金枪鱼、鳕鱼）、鱼油、亚麻籽、核桃等，其中的 ω-3 脂肪酸和 ω-6 脂肪酸对大脑发育、视力保护和心血管健康等方面都非常重要。应尽量减少饱和脂肪和反式脂肪的摄入，饱和脂肪主要存在于动物脂肪、黄油、奶油、棕榈油等食物中，过量摄入会增加血液中胆固醇水平，增加心血管疾病风险；反式脂肪常见于油炸食品、加工零食、人造奶油等，它不仅会升高坏胆固醇，还会降低好胆固醇，对健康危害较大。
+                                    </div>
+                                </div>
+                            </div>
+                            <!--//card-->
+                            <div class="card">
+                                <div class="card-header" id="faq1-heading-4">
+                                    <h4 class="card-title">
+
+                                        <button class="card-toggle btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#faq1-4" aria-expanded="false" aria-controls="faq1-4"><span class="pe-icon pe-7s-plus"></span>碳水化合物是减肥的大敌吗？</button>
+                                    </h4>
+                                </div>
+                                <div class="panel-collapse collapse" id="faq1-4" aria-labelledby="faq1-heading-4" data-parent="#faq1-accordion">
+                                    <div class="card-body">
+                                        碳水化合物并非减肥的大敌，关键在于选择正确的碳水化合物种类和控制摄入量。碳水化合物是人体的主要能量来源，可分为简单碳水化合物和复杂碳水化合物。简单碳水化合物如精制谷物（白米、白面）、添加糖（糖果、饮料中的糖）等，消化吸收快，容易引起血糖快速上升，过量摄入容易转化为脂肪储存起来。而复杂碳水化合物如全谷物（糙米、全麦面包、燕麦）、薯类（红薯、土豆）、豆类（红豆、绿豆、黑豆）等，富含膳食纤维，消化吸收相对较慢，能提供更持久的能量，同时增加饱腹感，减少其他高热量食物的摄入，有助于控制体重。在减肥期间，应减少简单碳水化合物的摄入，适当增加复杂碳水化合物的比例，并结合合理的运动，这样碳水化合物就可以成为减肥过程中的有益成分，而不是阻碍。
+                                    </div>
+                                </div>
+                            </div>
+                            <!--//card-->
+                            <div class="card">
+                                <div class="card-header" id="faq1-heading-5">
+                                    <h4 class="card-title">
+
+                                        <button class="card-toggle btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#faq1-5" aria-expanded="false" aria-controls="faq1-5"><span class="pe-icon pe-7s-plus"></span>维生素 D 有什么作用，如何补充？</button>
+                                    </h4>
+                                </div>
+                                <div class="panel-collapse collapse" id="faq1-5" aria-labelledby="faq1-heading-5" data-parent="#faq1-accordion">
+                                    <div class="card-body">
+                                       维生素 D 对人体健康有着重要作用。它有助于促进肠道对钙和磷的吸收，维持正常的血钙和血磷水平，对骨骼的生长、发育和维持骨骼健康起着关键作用。此外，维生素 D 还在免疫系统调节、肌肉功能维持等方面发挥一定作用。补充维生素 D 可以通过多种方式，其中最常见的是通过阳光照射，皮肤中的 7 - 脱氢胆固醇在紫外线的作用下可以转化为维生素 D。食物来源方面，富含维生素 D 的食物有深海鱼（如鲑鱼、沙丁鱼）、蛋黄、奶制品等。对于一些无法通过阳光照射或饮食获取足够维生素 D 的人群，如老年人、素食者、室内工作者等，可能需要通过补充剂来补充维生素 D。
+                                    </div>
+                                </div>
+                            </div>
+                            <!--//card-->
+                            <div class="card">
+                                <div class="card-header" id="faq1-heading-6">
+                                    <h4 class="card-title">
+
+                                        <button class="card-toggle btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#faq1-6" aria-expanded="false" aria-controls="faq1-6"><span class="pe-icon pe-7s-plus"></span>膳食纤维对肠道健康有哪些益处？</button>
+                                    </h4>
+                                </div>
+                                <div class="panel-collapse collapse" id="faq1-6" aria-labelledby="faq1-heading-6" data-parent="#faq1-accordion">
+                                    <div class="card-body">
+                                        膳食纤维对肠道健康益处多多。一方面，它可以增加粪便的体积，促进肠道蠕动，使粪便更容易排出体外，从而预防和缓解便秘。另一方面，膳食纤维是肠道有益菌的食物来源，能够促进有益菌的生长和繁殖，改善肠道菌群平衡，增强肠道的屏障功能，有助于抵御有害菌的入侵。此外，膳食纤维还可以在肠道内被细菌发酵，产生短链脂肪酸，如丁酸等，这些短链脂肪酸对肠道细胞具有营养作用，有助于维持肠道黏膜的健康。
+                                    </div>
+                                </div>
+                            </div>
+                            <!--//card-->
+
+	                    </div><!--//faq1-accordion-->
+				    </div><!--//app-card-body-->
+				</div><!--//app-card-->
+			    <div class="app-card app-card-accordion shadow-sm mb-4">
+				    <div class="app-card-header p-3">
+				       <h4 class="app-card-title">问题</h4>
+				    </div><!--//app-card-header-->
+				    <div class="app-card-body p-4 pt-0">
+					    <div id="faq2-accordion" class="faq2-accordion faq-accordion accordion">
+                            <div class="card">
+                                <div class="card-header" id="faq2-heading-1">
+                                    <h4 class="card-title">
+
+                                        <button class="card-toggle btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#faq2-1" aria-expanded="false" aria-controls="faq2-1"><span class="pe-icon pe-7s-plus"></span>铁元素对人体的重要性体现在哪些方面？如何预防缺铁性贫血？</button>
+                                    </h4>
+                                </div>
+                                <div class="panel-collapse collapse" id="faq2-1" aria-labelledby="faq2-heading-1" data-parent="#faq2-accordion">
+                                    <div class="card-body">
+                                        铁是人体必需的微量元素之一，具有重要的生理功能。它是血红蛋白的重要组成部分，血红蛋白负责在血液中运输氧气，将氧气从肺部输送到身体的各个组织和器官，保证细胞的正常代谢和功能。同时，铁也是一些酶的组成成分，参与身体的能量代谢、免疫功能等过程。预防缺铁性贫血可以从饮食入手，增加富含铁的食物摄入，如红肉（牛肉、猪肉、羊肉）、动物肝脏、豆类、绿叶蔬菜、全麦面包等。其中，动物性食物中的铁为血红素铁，吸收率较高，而植物性食物中的铁为非血红素铁，吸收率相对较低。可以同时摄入富含维生素 C 的食物，如柑橘类水果、草莓、猕猴桃、青椒等，因为维生素 C 可以促进非血红素铁的吸收。对于一些特殊人群，如孕妇、儿童、老年人等，由于对铁的需求量增加或吸收能力下降，可能需要在医生的指导下适当补充铁剂。
+                                    </div>
+                                </div>
+                            </div>
+                            <!--//card-->
+                            <div class="card">
+                                <div class="card-header" id="faq2-heading-2">
+                                    <h4 class="card-title">
+
+                                        <button class="card-toggle btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#faq2-2" aria-expanded="false" aria-controls="faq2-2"><span class="pe-icon pe-7s-plus"></span>水对人体有哪些重要作用？如何保证充足的水分摄入？</button>
+                                    </h4>
+                                </div>
+                                <div class="panel-collapse collapse" id="faq2-2" aria-labelledby="faq2-heading-2" data-parent="#faq2-accordion">
+                                    <div class="card-body">
+                                        水是生命之源，对人体具有多种重要作用。首先，水是人体细胞和组织的重要组成部分，参与身体的各种生理生化反应，是许多化学反应的介质。其次，水具有运输营养物质和代谢废物的作用，它可以将消化吸收的营养物质输送到身体的各个部位，同时将代谢产生的废物如尿素、尿酸等通过尿液排出体外。此外，水还能够调节体温，通过出汗等方式散热，维持体温的稳定。保证充足的水分摄入，一般建议成年人每天饮用 1500 - 2000 毫升的水。可以通过定时饮水的方式，不要等到口渴了才喝水。除了直接饮水外，还可以通过摄入一些含水量高的食物来补充水分，如水果（西瓜、黄瓜、梨等）、蔬菜（冬瓜、芹菜、菠菜等）。在运动、高温环境或生病等情况下，身体对水分的需求会增加，应适当增加饮水量。
+                                    </div>
+                                </div>
+                            </div>
+                            <!--//card-->
+                            <div class="card">
+                                <div class="card-header" id="faq2-heading-3">
+                                    <h4 class="card-title">
+
+                                        <button class="card-toggle btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#faq2-3" aria-expanded="false" aria-controls="faq2-3"><span class="pe-icon pe-7s-plus"></span>锌对人体有什么作用？哪些食物富含锌？</button>
+                                    </h4>
+                                </div>
+                                <div class="panel-collapse collapse" id="faq2-3" aria-labelledby="faq2-heading-3" data-parent="#faq2-accordion">
+                                    <div class="card-body">
+                                        锌是人体中不可或缺的微量元素，在人体生长发育、免疫、内分泌等多个生理过程中发挥关键作用。它参与多种酶的合成与激活，对蛋白质、核酸的合成以及细胞的分裂和生长至关重要，有助于促进儿童和青少年的生长发育。锌还能增强免疫系统功能，帮助身体抵抗感染和疾病，同时对维持正常的味觉和嗅觉也有重要作用。富含锌的食物有很多，如贝类（生蚝、扇贝、牡蛎等），其锌含量较高；红肉（牛肉、猪肉、羊肉等）也是锌的良好来源；此外，坚果（如腰果、杏仁）、豆类（如黄豆、黑豆）、全谷物以及动物肝脏等食物中也含有一定量的锌。
+                                    </div>
+                                </div>
+                            </div>
+                            <!--//card-->
+                            <div class="card">
+                                <div class="card-header" id="faq2-heading-4">
+                                    <h4 class="card-title">
+
+                                        <button class="card-toggle btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#faq2-4" aria-expanded="false" aria-controls="faq2-4"><span class="pe-icon pe-7s-plus"></span>为什么要控制盐的摄入量？</button>
+                                    </h4>
+                                </div>
+                                <div class="panel-collapse collapse" id="faq2-4" aria-labelledby="faq2-heading-4" data-parent="#faq2-accordion">
+                                    <div class="card-body">
+                                        过量摄入盐对健康有诸多不利影响，因此需要控制盐的摄入量。首先，高盐饮食会导致体内钠离子增多，引起水钠潴留，增加血容量，进而升高血压，长期高血压会增加心脑血管疾病的发病风险，如冠心病、脑卒中等。其次，高盐饮食还会对肾脏造成负担，影响肾脏的正常功能，长期下去可能导致肾脏疾病。此外，过量的盐摄入还与胃癌的发生有一定关联，高盐食物可能会损伤胃黏膜，增加幽门螺杆菌感染的风险，从而促进胃癌的发生发展。为了保持身体健康，成年人每天的食盐摄入量应不超过 5 克。
+                                    </div>
+                                </div>
+                            </div>
+                            <!--//card-->
+
+
+	                    </div><!--//faq2-accordion-->
+				    </div><!--//app-card-body-->
+				</div><!--//app-card-->
+				<div class="app-card app-card-accordion shadow-sm mb-4">
+				    <div class="app-card-header p-3">
+				       <h4 class="app-card-title">问题</h4>
+				    </div><!--//app-card-header-->
+				    <div class="app-card-body p-4 pt-0">
+					    <div id="faq3-accordion" class="faq3-accordion faq-accordion accordion">
+                            <div class="card">
+                                <div class="card-header" id="faq3-heading-1">
+                                    <h4 class="card-title">
+
+                                        <button class="card-toggle btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#faq3-1" aria-expanded="false" aria-controls="faq3-1"><span class="pe-icon pe-7s-plus"></span>水果和蔬菜可以相互替代吗？</button>
+                                    </h4>
+                                </div>
+                                <div class="panel-collapse collapse" id="faq3-1" aria-labelledby="faq3-heading-1" data-parent="#faq3-accordion">
+                                    <div class="card-body">
+                                        水果和蔬菜不能完全相互替代。虽然它们都能为人体提供维生素、矿物质、膳食纤维和植物化学物等营养成分，但在营养成分的含量和种类上存在一些差异。蔬菜的种类更为丰富，总体上维生素 C、胡萝卜素、矿物质和膳食纤维的含量一般高于水果。例如，绿叶蔬菜是维生素 K、叶酸、钙、镁等的良好来源，而这些营养素在水果中的含量相对较低。水果中含有一些蔬菜中含量较少的成分，如葡萄糖、果糖等简单糖类，以及一些特殊的生物活性物质，如苹果中的果胶、柑橘类水果中的类黄酮等。此外，水果的口感通常更甜，更受人们喜爱，可作为加餐或零食的选择。因此，为了获得全面的营养，应保证水果和蔬菜的多样化摄入，不能用水果替代蔬菜，也不能只吃蔬菜而不吃水果。
+                                    </div>
+                                </div>
+                            </div>
+                            <!--//card-->
+                            <div class="card">
+                                <div class="card-header" id="faq3-heading-2">
+                                    <h4 class="card-title">
+
+                                        <button class="card-toggle btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#faq3-2" aria-expanded="false" aria-controls="faq3-2"><span class="pe-icon pe-7s-plus"></span>什么是优质蛋白质？如何通过饮食获取优质蛋白质？</button>
+                                    </h4>
+                                </div>
+                                <div class="panel-collapse collapse" id="faq3-2" aria-labelledby="faq3-heading-2" data-parent="#faq3-accordion">
+                                    <div class="card-body">
+                                        优质蛋白质是指那些含有人体必需氨基酸种类齐全、数量充足、比例适当，能够满足人体需要的蛋白质。一般来说，动物蛋白和大豆蛋白属于优质蛋白质。动物蛋白如鸡蛋、牛奶、鱼肉、鸡肉、牛肉等，其氨基酸组成与人体蛋白质更为接近，生物利用率高。大豆蛋白也是优质植物蛋白，含有丰富的必需氨基酸。通过饮食获取优质蛋白质，可以每天保证一个鸡蛋、一杯牛奶，适量摄入瘦肉、鱼类，每周可以吃 2 - 3 次豆类及其制品，如豆腐、豆浆等。这样的饮食搭配可以为身体提供充足的优质蛋白质，满足身体的生长、修复和维持正常生理功能的需求。
+                                    </div>
+                                </div>
+                            </div>
+                            <!--//card-->
+
+	                    </div><!--//faq3-accordion-->
+				    </div><!--//app-card-body-->
+				</div><!--//app-card-->
+
+
+		    </div><!--//container-fluid-->
+	    </div><!--//app-content-->
+
+	    <footer class="app-footer">
+		    <div class="container text-center py-3">
+		         <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
+            <small class="copyright">Copyright © 2025.食品营养数据分析 All rights reserved. <a target="_blank" href="https://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></small>
+
+		    </div>
+	    </footer><!--//app-footer-->
+
+    </div><!--//app-wrapper-->
+ 
+    <!-- Javascript -->          
+    <script src="/static/plugins/popper.min.js"></script>
+    <script src="/static/plugins/bootstrap/js/bootstrap.min.js"></script>
+    
+    <!-- Page Specific JS -->
+    <script src="/static/js/app.js"></script>
+
+</body>
+</html> 
+
