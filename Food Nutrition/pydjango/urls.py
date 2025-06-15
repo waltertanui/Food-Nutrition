@@ -18,15 +18,18 @@ Including another URLconf
 
 
 
-
-
 from django.contrib import admin
 from django.urls import path, include
 
 from django.conf import settings
 from django.conf.urls.static import static
+# {{ edit_1 }}
+from django.views.generic.base import RedirectView
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # {{ edit_2 }}
+    # Redirect the root URL to the myApp index page
+    path('', RedirectView.as_view(url='/myApp/index/', permanent=False), name='index_redirect'),
     path('myApp/', include('myApp.urls')),  # 保留这种引入方式，方便以myApp为前缀访问相关路径
 ]
 

@@ -129,4 +129,3 @@ def apple_data_view(request):
 
 
 
-
