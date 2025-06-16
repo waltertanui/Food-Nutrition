@@ -72,6 +72,10 @@ class Migration(migrations.Migration):
                 ('exercise_frequency', models.CharField(blank=True, max_length=255, null=True, verbose_name='运动频率')),
                 ('sleep_hours', models.IntegerField(blank=True, null=True, verbose_name='睡眠时间（小时）')),
                 ('health_goal', models.CharField(blank=True, max_length=255, null=True, verbose_name='健康目标')),
+                ('signup_time', models.DateTimeField(blank=True, null=True, verbose_name='注册时间')),
+                ('signup_location', models.CharField(blank=True, max_length=100, null=True, verbose_name='注册地点')),
+                ('last_login_time', models.DateTimeField(blank=True, null=True, verbose_name='最近登录时间')),
+                ('last_login_location', models.CharField(blank=True, max_length=100, null=True, verbose_name='最近登录地点')),
             ],
             options={
                 'db_table': 'user',

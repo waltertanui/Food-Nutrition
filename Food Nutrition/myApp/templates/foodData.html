@@ -544,7 +544,7 @@
         
         // Get top 10 foods by carbohydrate content
         var sortedFoods = foods.sort((a, b) => parseFloat(b.CHO) - parseFloat(a.CHO)).slice(0, 10);
-        
+
         var names = sortedFoods.map(f => f.Name);
         var carbs = sortedFoods.map(f => parseFloat(f.CHO) || 0);
 

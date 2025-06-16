@@ -53,10 +53,10 @@ def logout(request):
     return  redirect('login')
 
 def index(request):
-    uname=request.session.get('name')
-    print(uname)
-    userinfo=User.objects.get(name=uname)
-    # Fetch apple data from the database
+    uname = request.session.get('name')
+    userinfo = User.objects.get(name=uname)
+    
+    # Fetch apple data (keep your existing apple data code)
     try:
         apple = Foodinfo.objects.get(Name='苹果')
         apple_data = {
@@ -95,9 +95,32 @@ def index(request):
     except Foodinfo.DoesNotExist:
         apple_data = {}
 
+    # Fetch coconut data
+    try:
+        coconut = Foodinfo.objects.get(Name='椰子')
+        coconut_data = {
+            '可食用部分': coconut.Edible,
+            '水分': coconut.Water,
+            '能量': coconut.Energy,
+            '蛋白质': coconut.Protein,
+            '脂肪': coconut.Fat,
+            '碳水化合物': coconut.CHO,
+            '总膳食纤维': coconut.DietaryFiber,
+            '维生素C': coconut.VitaminC,
+            '钙': coconut.Ca,
+            '铁': coconut.Fe,
+            '锌': coconut.Zn
+        }
+        has_coconut_data = True
+    except Foodinfo.DoesNotExist:
+        coconut_data = {}
+        has_coconut_data = False
+
     return render(request, 'index.html', {
         'userinfo': userinfo,
         'apple_data_json': json.dumps(apple_data, ensure_ascii=False),
+        'coconut_data_json': json.dumps(coconut_data, ensure_ascii=False),
+        'has_coconut_data': has_coconut_data
     })
 
 def account(request):
