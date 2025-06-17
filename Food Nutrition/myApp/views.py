@@ -56,43 +56,30 @@ def index(request):
     uname = request.session.get('name')
     userinfo = User.objects.get(name=uname)
     
-    # Fetch apple data (keep your existing apple data code)
+    # Fetch apple data
     try:
-        apple = Foodinfo.objects.get(Name='苹果')
-        apple_data = {
-            '可食用部分': apple.Edible,
-            '水分': apple.Water,
-            '能量': apple.Energy,
-            '蛋白质': apple.Protein,
-            '脂肪': apple.Fat,
-            '胆固醇': apple.Cholesterol,
-            '灰分': apple.Ash,
-            '碳水化合物': apple.CHO,
-            '总膳食纤维': apple.DietaryFiber,
-            '胡萝卜素': apple.Carotene,
-            '维生素A': apple.Vitamin,
-            'α-生育酚当量': apple.α_TE,
-            '硫胺素': apple.Thiamin,
-            '核黄素': apple.Riboflavin,
-            '烟酸': apple.Niacin,
-            '维生素C': apple.VitaminC,
-            '钙': apple.Ca,
-            '磷': apple.P,
-            '钾': apple.K,
-            '钠': apple.Na,
-            '镁': apple.Mg,
-            '铁': apple.Fe,
-            '锌': apple.Zn,
-            '硒': apple.Se,
-            '铜': apple.Cu,
-            '锰': apple.Mn,
-            '碘': apple.I,
-            '饱和脂肪酸': apple.SFA,
-            '单不饱和脂肪酸': apple.MUFA,
-            '多不饱和脂肪酸': apple.PUFA,
-            '总脂肪酸': apple.TotalFattyAcids,
-        }
-    except Foodinfo.DoesNotExist:
+        # Try to get the average apple if it exists
+        apple = Foodinfo.objects.filter(Name='苹果(均值)').first()
+        # If not, get any apple
+        if not apple:
+            apple = Foodinfo.objects.filter(Name__contains='苹果').first()
+        if apple:
+            apple_data = {
+                '可食用部分': apple.Edible,
+                '水分': apple.Water,
+                '能量': apple.Energy,
+                '蛋白质': apple.Protein,
+                '脂肪': apple.Fat,
+                '碳水化合物': apple.CHO,
+                '总膳食纤维': apple.DietaryFiber,
+                '维生素C': apple.VitaminC,
+                '钙': apple.Ca,
+                '铁': apple.Fe,
+                '锌': apple.Zn
+            }
+        else:
+            apple_data = {}
+    except Exception as e:
         apple_data = {}
 
     # Fetch coconut data

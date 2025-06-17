@@ -376,10 +376,8 @@
 							    <div class="mb-3 d-flex">   
 
 							    </div>
-						       <div class="chart-container" >
-                                        <div id="chart-container1" style="width:500px; height: 350px;">
-
-						                 </div>
+						       <div class="chart-container">
+                                <div id="chart-container1" style="width:500px; height: 350px;"></div>
 						        </div>
 					        </div><!--//app-card-body-->
 				        </div><!--//app-card-->
@@ -403,38 +401,6 @@
 							    <div class="chart-container">
 								    {% if has_coconut_data %}
 									    <div id="chart-container2" style="width: 100%; height: 400px;"></div>
-									    <script>
-										    var coconutData = {{ coconut_data_json|safe }};
-										    var categories2 = Object.keys(coconutData);
-										    var values2 = Object.values(coconutData).map(function(x) {
-											    var v = parseFloat(x);
-											    return isNaN(v) ? 0 : v;
-										    });
-										    var chartDom2 = document.getElementById('chart-container2');
-										    var myChart2 = echarts.init(chartDom2);
-										    var option2 = {
-											    title: { text: 'Coconut Nutrient Composition', left: 'center' },
-											    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-											    grid: { left: '3%', right: '4%', bottom: '15%', containLabel: true },
-											    color: ['#69B1FF'],
-											    xAxis: {
-												    type: 'category',
-												    data: categories2,
-												    axisLabel: { interval: 0, rotate: 45, fontSize: 8, color: '#666' }
-											    },
-											    yAxis: { type: 'value', name: 'Amount', nameTextStyle: { color: '#666' } },
-											    series: [{
-												    name: 'Nutrient',
-												    type: 'bar',
-												    barWidth: '60%',
-												    data: values2,
-												    itemStyle: { borderRadius: [4, 4, 0, 0] },
-												    label: { show: true, position: 'top', formatter: '{c}', fontSize: 8 }
-											    }]
-										    };
-										    window.addEventListener('resize', function() { myChart2.resize(); });
-										    myChart2.setOption(option2);
-									    </script>
 								    {% else %}
 									    <div class="alert alert-warning text-center" role="alert">
 										    No Data Available for Coconut.
@@ -599,6 +565,9 @@ statsFigures.forEach((figure) => {
 
 
             var appleData = {{ apple_data_json|safe }};
+            var coconutData = {{ coconut_data_json|safe }};
+            console.log("Apple Data:", appleData);
+            console.log("Coconut Data:", coconutData);
             var categories = Object.keys(appleData);
             var values = Object.values(appleData).map(function(x) {
                 var v = parseFloat(x);
@@ -633,92 +602,65 @@ statsFigures.forEach((figure) => {
             myChart.setOption(option);
     </script>
 	//图2<script>
-
-
             // Second Chart - Food Nutrition Comparison
-            var hasComparisonData = {{ has_comparison_data|yesno:"true,false" }};
             var comparisonData = {{ comparison_data_json|safe }};
-
             var chartDom2 = document.getElementById('chart-container2');
             var myChart2 = echarts.init(chartDom2);
 
-            if (!hasComparisonData) {
-                // Show "No Data" message if data is not available
-                option2 = {
-                    title: {
-                        text: '食物营养对比',
-                        left: 'center'
-                    },
-                    graphic: {
-                        elements: [{
-                            type: 'text',
-                            left: 'center',
-                            top: 'middle',
-                            style: {
-                                text: '暂无营养对比数据',
-                                fontSize: 20,
-                                fontWeight: 'bold',
-                                fill: '#999'
-                            }
-                        }]
-                    }
+            // Process the data for visualization
+            var foodNames = Object.keys(comparisonData);
+            var nutrients = Object.keys(comparisonData[foodNames[0]]);
+            
+            // Prepare series data
+            var series = nutrients.map(function(nutrient) {
+                return {
+                    name: nutrient,
+                    type: 'bar',
+                    data: foodNames.map(function(food) {
+                        var value = comparisonData[food][nutrient];
+                        return parseFloat(value) || 0;
+                    })
                 };
-            } else {
-                // Process the data for visualization
-                var foodNames = Object.keys(comparisonData);
-                var nutrients = Object.keys(comparisonData[foodNames[0]]);
-                
-                // Prepare series data
-                var series = nutrients.map(function(nutrient) {
-                    return {
-                        name: nutrient,
-                        type: 'bar',
-                        data: foodNames.map(function(food) {
-                            var value = comparisonData[food][nutrient];
-                            return parseFloat(value) || 0;
-                        })
-                    };
-                });
+            });
 
-                option2 = {
-                    title: {
-                        text: '食物营养对比',
-                        left: 'center'
-                    },
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      type: 'shadow'
-    }
-  },
-                    legend: {
-                        data: nutrients,
-                        top: 30,
-                        type: 'scroll'
-                    },
-  grid: {
-    left: '3%',
-    right: '4%',
-                        bottom: '15%',
-    containLabel: true
-  },
-  xAxis: {
-                        type: 'category',
-                        data: foodNames,
-                        axisLabel: {
-                            interval: 0,
-                            rotate: 45
-                        }
-  },
-  yAxis: {
-                        type: 'value',
-                        name: '含量'
-                    },
-                    series: series,
-                    color: ['#36B37E', '#69B1FF', '#FF8F6B', '#FFBC42', '#4ECDC4', 
-                            '#45B7D1', '#96CEB4', '#FFEEAD', '#D4A5A5', '#9EC1CF']
-                };
-            }
+            var option2 = {
+                title: {
+                    text: '食物营养对比',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
+                },
+                legend: {
+                    data: nutrients,
+                    top: 30,
+                    type: 'scroll'
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '15%',
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'category',
+                    data: foodNames,
+                    axisLabel: {
+                        interval: 0,
+                        rotate: 45
+                    }
+                },
+                yAxis: {
+                    type: 'value',
+                    name: '含量'
+                },
+                series: series,
+                color: ['#36B37E', '#69B1FF', '#FF8F6B', '#FFBC42', '#4ECDC4', 
+                        '#45B7D1', '#96CEB4', '#FFEEAD', '#D4A5A5', '#9EC1CF']
+            };
 
             myChart2.setOption(option2);
 
@@ -726,7 +668,6 @@ statsFigures.forEach((figure) => {
             window.addEventListener('resize', function() {
                 myChart2.resize();
             });
-
 	</script>
 
 
