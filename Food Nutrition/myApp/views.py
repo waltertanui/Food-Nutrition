@@ -58,31 +58,34 @@ def index(request):
     
     # Fetch apple data
     try:
-        # Try to get the average apple if it exists
-        apple = Foodinfo.objects.filter(Name='苹果(均值)').first()
-        # If not, get any apple
-        if not apple:
-            apple = Foodinfo.objects.filter(Name__contains='苹果').first()
-        if apple:
+        apples = Foodinfo.objects.filter(Name__contains='苹果')
+        apple_data_list = []
+
+        for apple in apples:
             apple_data = {
+                'name': apple.Name,
                 '可食用部分': apple.Edible,
                 '水分': apple.Water,
                 '能量': apple.Energy,
                 '蛋白质': apple.Protein,
                 '脂肪': apple.Fat,
                 '碳水化合物': apple.CHO,
-                '总膳食纤维': apple.DietaryFiber,
-                '维生素C': apple.VitaminC,
+                '总膳食纤维': getattr(apple, 'DietaryFiber', 'N/A'),
+                '维生素C': getattr(apple, 'VitaminC', 'N/A'),
                 '钙': apple.Ca,
                 '铁': apple.Fe,
                 '锌': apple.Zn
             }
-        else:
-            apple_data = {}
+            apple_data_list.append(apple_data)
+            
+        # For backward compatibility, keep the first apple data separately
+        apple_data = apple_data_list[0] if apple_data_list else {}
     except Exception as e:
+        print("Error fetching apple data:", str(e))
+        apple_data_list = []
         apple_data = {}
 
-    # Fetch coconut data
+    # Fetch coconut data (unchanged)
     try:
         coconut = Foodinfo.objects.get(Name='椰子')
         coconut_data = {
@@ -106,6 +109,7 @@ def index(request):
     return render(request, 'index.html', {
         'userinfo': userinfo,
         'apple_data_json': json.dumps(apple_data, ensure_ascii=False),
+        'apple_data_list_json': json.dumps(apple_data_list, ensure_ascii=False),  # Add the list of all apple data
         'coconut_data_json': json.dumps(coconut_data, ensure_ascii=False),
         'has_coconut_data': has_coconut_data
     })
