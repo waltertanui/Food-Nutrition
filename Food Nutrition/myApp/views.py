@@ -7,20 +7,23 @@ from .utils.error import *
 from .utils import getHomeData
 from .utils.getPublicData import getAppleData
 import json
+import re
 
+# Configure logging
+logger = logging.getLogger(__name__)
 
 # Create your views here.
 
 def login(request):
-    if request.method=='GET':
-        return render(request,'login.html')
+    if request.method == 'GET':
+        return render(request, 'login.html')
     else:
         uname = request.POST.get('username')
         pwd = request.POST.get('password')
         try:
-            user=User.objects.get(name=uname,password=pwd)
-            request.session['name']=user.name
-            return  redirect('/myApp/index')
+            user = User.objects.get(name=uname, password=pwd)
+            request.session['name'] = user.name
+            return redirect('/myApp/index')
         except:
             messages.error(request, '用户名或密码出错！')
             return redirect('/myApp/login')
@@ -44,12 +47,12 @@ def signup(request):
             messages.success(request, '注册成功！请登录。')
             return redirect('/myApp/login?success=1')
         except Exception as e:
-         messages.error(request, f'注册失败：{str(e)}')
-         return redirect('/myApp/signup')
+            messages.error(request, f'注册失败：{str(e)}')
+            return redirect('/myApp/signup')
 
 def logout(request):
     request.session.clear()
-    return  redirect('login')
+    return redirect('login')
 
 def index(request):
     uname = request.session.get('name')
@@ -224,48 +227,74 @@ def charts(request):
 
 def recommend(request):
     uname = request.session.get('name')
-    userinfo = User.objects.get(name=uname)
+    if not uname:
+        messages.error(request, 'Please log in to access recommendations.')
+        return redirect('/myApp/login')
+    
+    try:
+        userinfo = User.objects.get(name=uname)
+    except User.DoesNotExist:
+        messages.error(request, 'User not found.')
+        return redirect('/myApp/login')
+
     if request.method == 'POST':
         # Basic Information
-        age = int(request.POST.get('age', 25))
+        try:
+            age = int(request.POST.get('age', 25))
+            height = float(request.POST.get('height', 170))
+            weight = float(request.POST.get('weight', 65))
+            if age <= 0 or height <= 0 or weight <= 0:
+                raise ValueError("Age, height, and weight must be positive.")
+        except (ValueError, TypeError):
+            messages.error(request, 'Invalid input for age, height, or weight.')
+            return render(request, 'recommend.html', {'userinfo': userinfo, 'recommended_foods': None})
+
         gender = request.POST.get('gender', 'male')
-        height = float(request.POST.get('height', 170))
-        weight = float(request.POST.get('weight', 65))
         
         # Health Information
         exercise_frequency = request.POST.get('exercise_frequency', 'never')
         sleep_hours = request.POST.get('sleep_hours', '7_8')
         allergies = request.POST.getlist('allergies')
         allergy_other = request.POST.get('allergy_other_text', '').strip()
-        if allergy_other:
+        if allergy_other and 'other' in allergies:
             allergies.append(allergy_other)
         health_conditions = request.POST.getlist('health_conditions')
         health_other = request.POST.get('health_other_text', '').strip()
-        if health_other:
+        if health_other and 'other' in health_conditions:
             health_conditions.append(health_other)
         
         # Dietary Preferences
         favorite_foods = request.POST.getlist('favorite_foods')
         favorite_other_food = request.POST.get('favorite_other_food_text', '').strip()
-        if favorite_other_food:
+        if favorite_other_food and 'other' in favorite_foods:
             favorite_foods.append(favorite_other_food)
         diet_restrictions = request.POST.getlist('diet_restrictions')
         diet_other_restriction = request.POST.get('diet_other_restriction_text', '').strip()
-        if diet_other_restriction:
+        if diet_other_restriction and 'other' in diet_restrictions:
             diet_restrictions.append(diet_other_restriction)
         taste_preferences = request.POST.getlist('taste_preferences')
         taste_other_taste = request.POST.get('taste_other_taste_text', '').strip()
-        if taste_other_taste:
+        if taste_other_taste and 'other' in taste_preferences:
             taste_preferences.append(taste_other_taste)
         
         # Lifestyle
         health_goals = request.POST.getlist('health_goals')
         health_goal_other = request.POST.get('health_goal_other_text', '').strip()
-        if health_goal_other:
+        if health_goal_other and 'other' in health_goals:
             health_goals.append(health_goal_other)
         
         # Fetch all foods
         foods = list(Foodinfo.objects.all().values())
+
+        # Helper function to parse numeric values
+        def parse_numeric(value):
+            if not value or value in ['—', 'N/A']:
+                return 0.0
+            try:
+                # Remove units like 'g', 'mg', 'kJ', etc.
+                return float(re.sub(r'[^\d.]', '', str(value)))
+            except (ValueError, TypeError):
+                return 0.0
 
         # Calculate BMR and daily energy needs
         def calculate_bmr(age, gender, height, weight):
@@ -278,11 +307,11 @@ def recommend(request):
 
         def calculate_daily_energy(bmr, exercise_frequency):
             activity_factors = {
-                "never": 1.2,
-                "rarely": 1.375,
-                "sometimes": 1.55,
-                "often": 1.725,
-                "always": 1.9
+                'never': 1.2,
+                'rarely': 1.375,
+                'sometimes': 1.55,
+                'often': 1.725,
+                'always': 1.9
             }
             return bmr * activity_factors.get(exercise_frequency, 1.2)
 
@@ -300,109 +329,133 @@ def recommend(request):
         target_fat = daily_energy * 0.3 / 9       # 30% from fat
         target_cho = daily_energy * 0.55 / 4      # 55% from carbs
 
-        # Adjust sleep impact (simplified)
+        # Adjust sleep impact
         sleep_adjustment = 1.0
-        if sleep_hours in ['under_6']:
-            sleep_adjustment = 0.95  # Slightly reduce recommendations due to poor sleep
-        elif sleep_hours in ['over_9']:
-            sleep_adjustment = 1.05  # Slightly increase for high sleep
+        if sleep_hours == 'under_6':
+            sleep_adjustment = 0.95
+        elif sleep_hours == 'over_9':
+            sleep_adjustment = 1.05
 
         recommended = []
         for food in foods:
+            food_name = food.get('Name', '').lower()
+            food_type = food.get('Type', '').lower()
+
             # Exclude allergens
-            if any(allergy.lower() in food['Name'].lower() or allergy.lower() in (food.get('Type', '')).lower() for allergy in allergies):
+            excluded = False
+            for allergy in allergies:
+                allergy_lower = allergy.lower()
+                if allergy_lower in food_name or allergy_lower in food_type:
+                    logger.debug(f"Excluding {food_name} due to allergy: {allergy_lower}")
+                    excluded = True
+                    break
+            if excluded:
                 continue
 
             # Filter based on health conditions
             try:
                 if 'diabetes' in health_conditions or '糖尿病' in health_conditions:
-                    if float(food.get('CHO', 0)) >= 10:
+                    if parse_numeric(food.get('CHO', 0)) > 20:  # Relaxed threshold
+                        logger.debug(f"Excluding {food_name} due to high carbs for diabetes")
                         continue
                 if 'hypertension' in health_conditions or '高血压' in health_conditions:
-                    if float(food.get('Na', 0)) >= 100:
+                    if parse_numeric(food.get('Na', 0)) > 200:  # Relaxed threshold
+                        logger.debug(f"Excluding {food_name} due to high sodium for hypertension")
                         continue
                 if 'heart_disease' in health_conditions:
-                    if float(food.get('Fat', 0)) >= 5 or float(food.get('Cholesterol', 0)) >= 50:
+                    if parse_numeric(food.get('Fat', 0)) > 10 or parse_numeric(food.get('Cholesterol', 0)) > 100:
+                        logger.debug(f"Excluding {food_name} due to high fat/cholesterol for heart disease")
                         continue
-            except (ValueError, TypeError):
+            except (ValueError, TypeError) as e:
+                logger.warning(f"Error parsing health condition data for {food_name}: {e}")
                 continue
 
             # Filter based on dietary restrictions
             try:
                 if 'vegetarian' in diet_restrictions:
-                    if 'meat' in food['Name'].lower() or 'fish' in food['Name'].lower() or food.get('Type', '').lower() in ['meat', 'fish']:
+                    if 'meat' in food_name or 'fish' in food_name or food_type in ['meat', 'fish']:
+                        logger.debug(f"Excluding {food_name} due to vegetarian restriction")
                         continue
                 if 'vegan' in diet_restrictions:
-                    if any(term in food['Name'].lower() or term in food.get('Type', '').lower() for term in ['meat', 'fish', 'dairy', 'egg']):
+                    if any(term in food_name or term in food_type for term in ['meat', 'fish', 'dairy', 'egg']):
+                        logger.debug(f"Excluding {food_name} due to vegan restriction")
                         continue
                 if 'low_salt' in diet_restrictions:
-                    if float(food.get('Na', 0)) >= 50:
+                    if parse_numeric(food.get('Na', 0)) > 100:  # Relaxed threshold
+                        logger.debug(f"Excluding {food_name} due to low salt restriction")
                         continue
                 if 'low_fat' in diet_restrictions:
-                    if float(food.get('Fat', 0)) >= 3:
+                    if parse_numeric(food.get('Fat', 0)) > 5:  # Relaxed threshold
+                        logger.debug(f"Excluding {food_name} due to low fat restriction")
                         continue
-            except (ValueError, TypeError):
+            except (ValueError, TypeError) as e:
+                logger.warning(f"Error parsing dietary restriction data for {food_name}: {e}")
                 continue
 
-            # Prioritize favorite foods and taste preferences
-            score = 0
-            food_type = food.get('Type', '').lower()
-            food_name = food['Name'].lower()
-            
+            # Initialize score
+            score = 1.0  # Base score to ensure inclusion
+
             # Boost score for favorite foods
             if favorite_foods:
                 for fav in favorite_foods:
-                    if fav.lower() in food_type or fav.lower() in food_name:
+                    fav_lower = fav.lower()
+                    if fav_lower in food_name or fav_lower in food_type:
                         score += 10
-                    elif fav.lower() == 'fruits' and 'fruit' in food_type:
+                    elif fav_lower == 'fruits' and 'fruit' in food_type:
                         score += 10
-                    elif fav.lower() == 'vegetables' and 'vegetable' in food_type:
+                    elif fav_lower == 'vegetables' and 'vegetable' in food_type:
                         score += 10
-                    elif fav.lower() == 'grains' and 'grain' in food_type:
+                    elif fav_lower == 'grains' and 'grain' in food_type or '谷类' in food_type:
                         score += 10
-                    elif fav.lower() == 'snacks' and 'snack' in food_type:
+                    elif fav_lower == 'snacks' and 'snack' in food_type:
                         score += 10
 
-            # Boost score for taste preferences (simplified mapping)
+            # Boost score for taste preferences
             if taste_preferences:
                 for taste in taste_preferences:
-                    if taste.lower() == 'sweet' and any(term in food_name for term in ['sugar', 'honey', 'sweet']):
+                    taste_lower = taste.lower()
+                    if taste_lower == 'sweet' and any(term in food_name for term in ['sugar', 'honey', 'sweet', '果']):
                         score += 5
-                    elif taste.lower() == 'salty' and float(food.get('Na', 0)) > 50:
+                    elif taste_lower == 'salty' and parse_numeric(food.get('Na', 0)) > 50:
                         score += 5
-                    elif taste.lower() == 'sour' and float(food.get('VitaminC', 0)) > 10:  # Proxy for sourness
+                    elif taste_lower == 'sour' and parse_numeric(food.get('VitaminC', 0)) > 5:
                         score += 5
-                    elif taste.lower() == 'spicy' and any(term in food_name for term in ['chili', 'pepper']):
+                    elif taste_lower == 'spicy' and any(term in food_name for term in ['chili', 'pepper', '辣']):
                         score += 5
-                    elif taste.lower() == 'bitter' and any(term in food_name for term in ['bitter', 'kale']):
+                    elif taste_lower == 'bitter' and any(term in food_name for term in ['bitter', 'kale']):
                         score += 5
 
             # Adjust based on nutritional needs
             try:
-                protein = float(food.get('Protein', 0))
-                fat = float(food.get('Fat', 0))
-                cho = float(food.get('CHO', 0))
-                if (protein <= target_protein * 0.2 and fat <= target_fat * 0.2 and cho <= target_cho * 0.2):
-                    score += 5  # Favor foods that align with macro targets
-            except (ValueError, TypeError):
-                pass
+                protein = parse_numeric(food.get('Protein', 0))
+                fat = parse_numeric(food.get('Fat', 0))
+                cho = parse_numeric(food.get('CHO', 0))
+                if (protein <= target_protein * 0.3 and fat <= target_fat * 0.3 and cho <= target_cho * 0.3):
+                    score += 5
+            except (ValueError, TypeError) as e:
+                logger.warning(f"Error parsing nutritional data for {food_name}: {e}")
 
             # Apply sleep adjustment
             score *= sleep_adjustment
 
             # Add food with score
-            if score > 0 or not (favorite_foods or taste_preferences):  # Include all foods if no preferences
-                food['score'] = score
-                recommended.append(food)
+            food['score'] = score
+            recommended.append(food)
+            logger.debug(f"Added {food_name} with score {score}")
 
-        # Sort by score (highest first) and limit to top 10
+        # Sort by score and limit to top 10
         recommended = sorted(recommended, key=lambda x: x['score'], reverse=True)[:10]
+        logger.info(f"Generated {len(recommended)} recommendations for user {uname}")
 
         return render(request, 'recommend.html', {
             'userinfo': userinfo,
             'recommended_foods': recommended
         })
-    return render(request, 'recommend.html', {'userinfo': userinfo})
+
+    return render(request, 'recommend.html', {
+        'userinfo': userinfo,
+        'recommended_foods': None
+    })
 
 def help(request):
     uname = request.session.get('name')

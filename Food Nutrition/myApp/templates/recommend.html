@@ -7,33 +7,33 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="description" content="">
+    <meta name="description" content="Personalized food recommendation system">
     <meta name="author" content="Xiaoying Riley at 3rd Wave Media">
     <link rel="shortcut icon" href="favicon.ico">
 
-    <!-- FontAwesome JS-->
+    <!-- FontAwesome JS -->
     <script defer src="/static/plugins/fontawesome/js/all.min.js"></script>
 
     <!-- App CSS -->
     <link id="theme-style" rel="stylesheet" href="/static/css/portal.css">
 
-    <!-- 引入Tailwind CSS -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 引入Font Awesome -->
+
+    <!-- Font Awesome CSS -->
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <!-- 配置Tailwind自定义主题 -->
+    <!-- Tailwind Custom Theme -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        primary: '#10B981',      // 主色调：绿色
-                        secondary: '#3B82F6',    // 辅助色：蓝色
-                        accent: '#F97316',       // 强调色：橙色
-                        neutral: '#F3F4F6',      // 中性色：浅灰
-                        dark: '#1F2937'          // 深色：深灰
+                        primary: '#10B981',   // Green
+                        secondary: '#3B82F6', // Blue
+                        accent: '#F97316',    // Orange
+                        neutral: '#F3F4F6',   // Light Gray
+                        dark: '#1F2937'       // Dark Gray
                     },
                     fontFamily: {
                         inter: ['Inter', 'system-ui', 'sans-serif'],
@@ -43,14 +43,14 @@
                         'card-hover': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)'
                     },
                     maxWidth: {
-                        'app': '960px',          // 自定义最大宽度
+                        'app': '960px',       // Custom max width
                     }
                 },
             }
         }
     </script>
 
-    <!-- 自定义工具类 -->
+    <!-- Custom Tailwind Utilities -->
     <style type="text/tailwindcss">
         @layer utilities {
             .content-auto {
@@ -72,7 +72,7 @@
                 @apply block text-sm font-medium text-gray-700 mb-1.5;
             }
             .form-section {
-                @apply mb-6 px-4; /* 调整内边距 */
+                @apply mb-6 px-4;
             }
             .form-section-title {
                 @apply text-lg font-semibold text-gray-800 mb-3 flex items-center;
@@ -89,18 +89,17 @@
             .input-with-other {
                 @apply flex items-center space-x-2 mt-2;
             }
-            /* 居中布局 */
             .app-wrapper {
-                @apply w-full min-h-screen bg-gray-50 flex justify-center; /* 居中主容器 */
+                @apply w-full min-h-screen bg-gray-50 flex justify-center items-start;
             }
             .app-content {
-                @apply w-full max-w-app mx-auto px-4 py-8 flex flex-col items-center; /* 内容居中 */
+                @apply w-full max-w-app mx-auto px-4 py-8 flex flex-col items-center;
             }
             .app-footer {
-                @apply w-full max-w-app mx-auto text-center py-4; /* 页脚居中 */
+                @apply w-full max-w-app mx-auto text-center py-4;
             }
             .app-header-inner {
-                @apply w-full max-w-app mx-auto; /* 头部居中 */
+                @apply w-full max-w-app mx-auto;
             }
         }
     </style>
@@ -116,16 +115,16 @@
                             <a id="sidepanel-toggler" class="sidepanel-toggler d-inline-block d-xl-none" href="#">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="img"><title>Menu</title><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg>
                             </a>
-                        </div><!--//col-->
+                        </div>
                         <div class="search-mobile-trigger d-sm-none col">
                             <i class="search-mobile-trigger-icon fas fa-search"></i>
-                        </div><!--//col-->
+                        </div>
                         <div class="app-search-box col">
                             <form class="app-search-form">
                                 <input type="text" placeholder="Enter food name" name="search" class="form-control search-input">
                                 <button type="submit" class="btn search-btn btn-primary" value="Search"><i class="fas fa-search"></i></button>
                             </form>
-                        </div><!--//app-search-box-->
+                        </div>
                         <div class="app-utilities col-auto">
                             <div class="app-utility-item app-notifications-dropdown dropdown">
                                 <a class="dropdown-toggle no-toggle-arrow" id="notifications-dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false" title="Notifications">
@@ -133,26 +132,26 @@
                                         <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2z"/>
                                         <path fill-rule="evenodd" d="M8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
                                     </svg>
-                                </a><!--//dropdown-toggle-->
+                                </a>
                                 <div class="dropdown-menu p-0" aria-labelledby="notifications-dropdown-toggle">
                                     <div class="dropdown-menu-header p-3">
                                         <h5 class="dropdown-menu-title mb-0">Notifications</h5>
-                                    </div><!--//dropdown-menu-title-->
+                                    </div>
                                     <div class="dropdown-menu-content">
                                         <div class="item p-3">
                                             <div class="row gx-2 justify-content-between align-items-center">
                                                 <div class="col-auto">
                                                     <img class="profile-image" src="/static/images/profiles/profile-1.png" alt="">
-                                                </div><!--//col-->
+                                                </div>
                                                 <div class="col">
                                                     <div class="info">
-                                                        <div class="desc">Amy shared a file with you. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </div>
-                                                        <div class="meta"> 2 hrs ago</div>
+                                                        <div class="desc">Amy shared a file with you.</div>
+                                                        <div class="meta">2 hrs ago</div>
                                                     </div>
-                                                </div><!--//col-->
-                                            </div><!--//row-->
+                                                </div>
+                                            </div>
                                             <a class="link-mask" href="notifications.html"></a>
-                                        </div><!--//item-->
+                                        </div>
                                         <div class="item p-3">
                                             <div class="row gx-2 justify-content-between align-items-center">
                                                 <div class="col-auto">
@@ -162,63 +161,62 @@
                                                             <path fill-rule="evenodd" d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 1 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 1 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 1 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 1 1 0 1h-1a.5.5 0 0 1-.5-.5z"/>
                                                         </svg>
                                                     </div>
-                                                </div><!--//col-->
+                                                </div>
                                                 <div class="col">
                                                     <div class="info">
-                                                        <div class="desc">You have a new invoice. Proin venenatis interdum est.</div>
-                                                        <div class="meta"> 1 day ago</div>
+                                                        <div class="desc">You have a new invoice.</div>
+                                                        <div class="meta">1 day ago</div>
                                                     </div>
-                                                </div><!--//col-->
-                                            </div><!--//row-->
+                                                </div>
+                                            </div>
                                             <a class="link-mask" href="notifications.html"></a>
-                                        </div><!--//item-->
+                                        </div>
                                         <div class="item p-3">
                                             <div class="row gx-2 justify-content-between align-items-center">
                                                 <div class="col-auto">
                                                     <div class="app-icon-holder icon-holder-mono">
                                                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bar-chart-line" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2zm1 12h2V2h-2v12zm-3 0V7H7v7h2zm-5 0v-3H2v3h2z"/>
+                                                            <path fill-rule="evenodd" d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2zm1 12h2V2h-2v12zm-3 0V7H7v7h2zm-5 0v-3H2v3h2z"/>
                                                         </svg>
                                                     </div>
-                                                </div><!--//col-->
+                                                </div>
                                                 <div class="col">
                                                     <div class="info">
-                                                        <div class="desc">Your report is ready. Proin venenatis interdum est.</div>
-                                                        <div class="meta"> 3 days ago</div>
+                                                        <div class="desc">Your report is ready.</div>
+                                                        <div class="meta">3 days ago</div>
                                                     </div>
-                                                </div><!--//col-->
-                                            </div><!--//row-->
+                                                </div>
+                                            </div>
                                             <a class="link-mask" href="notifications.html"></a>
-                                        </div><!--//item-->
+                                        </div>
                                         <div class="item p-3">
                                             <div class="row gx-2 justify-content-between align-items-center">
                                                 <div class="col-auto">
                                                     <img class="profile-image" src="/static/images/profiles/profile-2.png" alt="">
-                                                </div><!--//col-->
+                                                </div>
                                                 <div class="col">
                                                     <div class="info">
                                                         <div class="desc">James sent you a new message.</div>
-                                                        <div class="meta"> 7 days ago</div>
+                                                        <div class="meta">7 days ago</div>
                                                     </div>
-                                                </div><!--//col-->
-                                            </div><!--//row-->
+                                                </div>
+                                            </div>
                                             <a class="link-mask" href="notifications.html"></a>
-                                        </div><!--//item-->
-                                    </div><!--//dropdown-menu-content-->
+                                        </div>
+                                    </div>
                                     <div class="dropdown-menu-footer p-2 text-center">
                                         <a href="notifications.html">View all</a>
                                     </div>
-                                </div><!--//dropdown-menu-->
-                            </div><!--//app-utility-item-->
+                                </div>
+                            </div>
                             <div class="app-utility-item">
                                 <a href="/myApp/account" title="Settings">
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-gear icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M8.837 1.626c-.246-.835-1.428-.835-1.674 0l-.094.319A1.873 1.873 0 0 1 4.377 3.06l-.292-.16c-.764-.415-1.6.42-1.184 1.185l.159.292a1.873 1.873 0 0 1-1.115 2.692l-.319.094c-.835.246-.835 1.428 0 1.674l.319.094a1.873 1.873 0 0 1 1.115 2.693l-.16.291c-.415.764.42 1.6 1.185 1.184l.292-.159a1.873 1.873 0 0 1 2.692 1.116l.094.318c.246.835 1.428.835 1.674 0l.094-.319a1.873 1.873 0 0 1 2.693-1.115l.291.16c.764.415 1.6-.42 1.184-1.185l-.159-.292a1.873 1.873 0 0 1 1.116-2.693l.319-.094c.835-.246.835-1.428 0-1.674l-.319-.094a1.873 1.873 0 0 1-1.115-2.692l.16-.292c.415-.764-.42-1.6-1.185-1.184l-.291.159A1.873 1.873 0 0 1 8.93 1.945l-.094-.319zm-2.633-.283c.527-1.79 3.065-1.79 3.592 0l.094.319a.873.873 0 0 0 1.255.52l.292-.16c1.64-.892 3.434.901 2.54 2.541l-.159.292a.873.873 0 0 0 .52 1.255l.319.094c1.79.527 1.79 3.065 0 3.592l-.319.094a.873.873 0 0 0-.52 1.255l.16.292c.893 1.64-.902 3.434-2.541 2.54l-.292-.159a.873.873 0 0 0-1.255.52l-.094.319c-.527 1.79-3.065 1.79-3.592 0l-.094-.319a.873.873 0 0 0-1.255-.52l-.292.16c-1.64.893-3.433-.902-2.54-2.541l.159-.292a.873.873 0 0 0-.52-1.255l-.319-.094c-1.79-.527-1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 0 .52-1.255l-.16-.292c-.892-1.64.902-3.433 2.541-2.54l.292.159a.873.873 0 0 0 1.255-.52l.094-.319z"/>
-                                    <path fill-rule="evenodd" d="M8 5.754a2.246 2.246 0 1 0 0 4.492 2.246 2.246 0 0 0 0-4.492zM4.754 8a3.246 3.246 0 1 1 6.492 0 3.246 3.246 0 0 1-6.492 0z"/>
+                                        <path fill-rule="evenodd" d="M8.837 1.626c-.246-.835-1.428-.835-1.674 0l-.094.319A1.873 1.873 0 0 1 4.377 3.06l-.292-.16c-.764-.415-1.6.42-1.184 1.185l.159.292a1.873 1.873 0 0 1-1.115 2.692l-.319.094c-.835.246-.835 1.428 0 1.674l.319.094a1.873 1.873 0 0 1 1.115 2.693l-.16.291c-.415.764.42 1.6 1.185 1.184l.292-.159a1.873 1.873 0 0 1 2.692 1.116l.094.318c.246.835 1.428.835 1.674 0l.094-.319a1.873 1.873 0 0 1 2.693-1.115l.291.16c.764.415 1.6-.42 1.184-1.185l-.159-.292a1.873 1.873 0 0 1 1.116-2.693l.319-.094c.835-.246.835-1.428 0-1.674l-.319-.094a1.873 1.873 0 0 1-1.115-2.692l.16-.292c.415-.764-.42-1.6-1.185-1.184l-.291.159A1.873 1.873 0 0 1 8.93 1.945l-.094-.319zm-2.633-.283c.527-1.79 3.065-1.79 3.592 0l.094.319a.873.873 0 0 0 1.255.52l.292-.16c1.64-.892 3.434.901 2.54 2.541l-.159.292a.873.873 0 0 0 .52 1.255l.319.094c1.79.527 1.79 3.065 0 3.592l-.319.094a.873.873 0 0 0-.52 1.255l.16.292c.893 1.64-.902 3.434-2.541 2.54l-.292-.159a.873.873 0 0 0-1.255.52l-.094.319c-.527 1.79-3.065 1.79-3.592 0l-.094-.319a.873.873 0 0 0-1.255-.52l-.292.16c-1.64.893-3.433-.902-2.54-2.541l.159-.292a.873.873 0 0 0-.52-1.255l-.319-.094c-1.79-.527-1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 0 .52-1.255l-.16-.292c-.892-1.64.902-3.433 2.541-2.54l.292.159a.873.873 0 0 0 1.255-.52l.094-.319z"/>
+                                        <path fill-rule="evenodd" d="M8 5.754a2.246 2.246 0 1 0 0 4.492 2.246 2.246 0 0 0 0-4.492zM4.754 8a3.246 3.246 0 1 1 6.492 0 3.246 3.246 0 0 1-6.492 0z"/>
                                     </svg>
                                 </a>
-                            </div><!--//app-utility-item-->
-                            
+                            </div>
                             <div class="app-utility-item app-user-dropdown dropdown">
                                 <a class="dropdown-toggle" id="user-dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="/media/{{ userinfo.avatar }}" alt="user profile"></a>
                                 <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
@@ -226,128 +224,117 @@
                                     <hr>
                                     <li><a class="dropdown-item" href="/myApp/logout">Logout</a></li>
                                 </ul>
-                            </div><!--//app-user-dropdown-->
-                        </div><!--//app-utilities-->
-                    </div><!--//row-->
-                </div><!--//app-header-content-->
-            </div><!--//container-fluid-->
-        </div><!--//app-header-inner-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div id="app-sidepanel" class="app-sidepanel">
             <div id="sidepanel-drop" class="sidepanel-drop"></div>
             <div class="sidepanel-inner d-flex flex-column">
-                <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
+                <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">×</a>
                 <div class="app-branding">
                     <a class="app-logo" href="/myApp/index"><img class="logo-icon mr-2" src="/static/images/logo.png" alt="logo"><span class="logo-text">Food Nutrition Data Analysis</span></a>
-                </div><!--//app-branding-->
-                
+                </div>
                 <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
                     <ul class="app-menu list-unstyled accordion" id="menu-accordion">
                         <li class="nav-item">
-                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                             <a class="nav-link" href="/myApp/index">
                                 <span class="nav-icon">
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house-door" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 .146.354v7a.5.5 0 0 1-.5.5H9.5a.5.5 0 0 1-.5-.5v-4H7v4a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .146-.354l6-6zM2.5 7.707V14H6v-4a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v4h3.5V7.707L8 2.207l-5.5 5.5z"/>
-                                    <path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                                        <path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 .146.354v7a.5.5 0 0 1-.5.5H9.5a.5.5 0 0 1-.5-.5v-4H7v4a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .146-.354l6-6zM2.5 7.707V14H6v-4a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v4h3.5V7.707L8 2.207l-5.5 5.5z"/>
+                                        <path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
                                     </svg>
                                 </span>
                                 <span class="nav-link-text">Home</span>
-                            </a><!--//nav-link-->
-                        </li><!--//nav-item-->
+                            </a>
+                        </li>
                         <li class="nav-item">
-                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                             <a class="nav-link" href="/myApp/foodCategory">
                                 <span class="nav-icon">
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
-                                    <path fill-rule="evenodd" d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 5.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 10.5z"/>
-                                    <circle cx="3.5" cy="5.5" r=".5"/>
-                                    <circle cx="3.5" cy="8" r=".5"/>
-                                    <circle cx="3.5" cy="10.5" r=".5"/>
+                                        <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                                        <path fill-rule="evenodd" d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 5.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 10.5z"/>
+                                        <circle cx="3.5" cy="5.5" r=".5"/>
+                                        <circle cx="3.5" cy="8" r=".5"/>
+                                        <circle cx="3.5" cy="10.5" r=".5"/>
                                     </svg>
                                 </span>
                                 <span class="nav-link-text">Food Categories</span>
-                            </a><!--//nav-link-->
-                        </li><!--//nav-item-->
+                            </a>
+                        </li>
                         <li class="nav-item has-submenu">
-                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                             <a class="nav-link submenu-toggle" href="/myApp/foodData" data-toggle="collapse" data-target="#submenu-1" aria-expanded="false" aria-controls="submenu-1">
                                 <span class="nav-icon">
-                                    <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-files" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M4 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4z"/>
-                                    <path d="M6 0h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2v-1a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1H4a2 2 0 0 1 2-2z"/>
+                                        <path fill-rule="evenodd" d="M4 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4z"/>
+                                        <path d="M6 0h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2v-1a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1H4a2 2 0 0 1 2-2z"/>
                                     </svg>
                                 </span>
                                 <span class="nav-link-text">Food Components</span>
-                                <span class="submenu-arrow"></span><!--//submenu-arrow-->
-                            </a><!--//nav-link-->
-                        </li><!--//nav-item-->
+                                <span class="submenu-arrow"></span>
+                            </a>
+                        </li>
                         <li class="nav-item has-submenu">
-                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                             <a class="nav-link submenu-toggle" href="/myApp/charts" data-toggle="collapse" data-target="#submenu-2" aria-expanded="false" aria-controls="submenu-2">
                                 <span class="nav-icon">
-                                    <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bar-chart-line" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M11 2a.1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2zm1 12h2V2h-2v12zm-3 0V7H7v7h2zm-5 0v-3H2v3h2z"/>
+                                        <path fill-rule="evenodd" d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2zm1 12h2V2h-2v12zm-3 0V7H7v7h2zm-5 0v-3H2v3h2z"/>
                                     </svg>
                                 </span>
                                 <span class="nav-link-text">Nutrition Charts</span>
                             </a>
-                        </li><!--//nav-item-->
+                        </li>
                         <li class="nav-item">
-                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                             <a class="nav-link active" href="/myApp/recommend">
                                 <span class="nav-icon">
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-columns-gap" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M6 1H1v3h5V1zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1zm14 12h-5v3h5v-3zm-5-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-5zM6 8H1v7h5V8zM1 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H1zm14-6h-5v7h5V1zm-5-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1h-5z"/>
+                                        <path fill-rule="evenodd" d="M6 1H1v3h5V1zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1zm14 12h-5v3h5v-3zm-5-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-5zM6 8H1v7h5V8zM1 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H1zm14-6h-5v7h5V1zm-5-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1h-5z"/>
                                     </svg>
                                 </span>
                                 <span class="nav-link-text">Personalized Recommendation</span>
-                            </a><!--//nav-link-->
-                        </li><!--//nav-item-->
+                            </a>
+                        </li>
                         <li class="nav-item">
-                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                             <a class="nav-link" href="/myApp/help">
                                 <span class="nav-icon">
                                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                    <path d="M5.255 5.786a.237 .237 0 0 0 .241 .247h.825c.138 0 .248-.113 .266 -.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374 .927-.965 1.371-.673 .489-1.206 1.06-1.168 1.987l.003 .217a.25 .25 0 0 0 .25 .246h.811a.25 .25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655 .59-2.75 2.286zm1.557 5.763c0 .533 .425 .927 1.01 .927 .609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009 .388-1.009 .94z"/>
+                                        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="M5.255 5.786a.237 .237 0 0 0 .241 .247h.825c.138 0 .248-.113 .266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374 .927-.965 1.371-.673 .489-1.206 1.06-1.168 1.987l.003 .217a.25 .25 0 0 0 .25 .246h.811a.25 .25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655 .59-2.75 2.286zm1.557 5.763c0 .533 .425 .927 1.01 .927 .609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009 .388-1.009 .94z"/>
                                     </svg>
                                 </span>
                                 <span class="nav-link-text">Nutritional Questions</span>
-                            </a><!--//nav-link-->
-                        </li><!--//nav-item-->
-                    </ul><!--//app-menu-->
-                </nav><!--//app-nav-->
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
                 <div class="app-sidepanel-footer">
                     <nav class="app-nav app-nav-footer">
                         <ul class="app-menu footer-menu list-unstyled">
                             <li class="nav-item">
-                                <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                                 <a class="nav-link" href="/myApp/account">
                                     <span class="nav-icon">
                                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M12 1H4a1 1 0 0 0-1 1v10.755S4 11 8 11s5 1.755 5 1.755V2a1 1 0 0 0-1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z"/>
-                                        <path fill-rule="evenodd" d="M8 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                            <path fill-rule="evenodd" d="M12 1H4a1 1 0 0 0-1 1v10.755S4 11 8 11s5 1.755 5 1.755V2a1 1 0 0 0-1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z"/>
+                                            <path fill-rule="evenodd" d="M8 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                                         </svg>
                                     </span>
                                     <span class="nav-link-text">My Page</span>
                                 </a>
-                                <br><!--//nav-link-->
-                            </li><!--//nav-item-->
-                        </ul><!--//footer-menu-->
+                            </li>
+                        </ul>
                     </nav>
-                </div><!--//app-sidepanel-footer-->
-            </div><!--//sidepanel-inner-->
-        </div><!--//app-sidepanel-->
-    </header><!--//app-header-->
-    
+                </div>
+            </div>
+        </div>
+    </header>
+
     <div class="app-wrapper">
         <div class="app-content">
             <main class="container mx-auto">
                 <div>
-                    <!-- 页面标题 -->
+                    <!-- Page Title -->
                     <div class="text-center mb-8">
                         <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-gray-800 mb-3">
                             Personalized Food Recommendation
@@ -357,9 +344,9 @@
                         </p>
                     </div>
 
-                    <!-- 表单卡片 -->
+                    <!-- Form Card -->
                     <div class="bg-white rounded-2xl shadow-card hover:shadow-card-hover transition-all duration-300 overflow-hidden">
-                        <!-- 进度指示器 -->
+                        <!-- Progress Indicator -->
                         <div class="bg-primary text-white p-4">
                             <div class="flex justify-between items-center">
                                 <h3 class="font-semibold">Personal Information Collection</h3>
@@ -371,10 +358,10 @@
                             </div>
                         </div>
 
-                        <!-- 表单内容 -->
+                        <!-- Form Content -->
                         <form id="food-recommendation-form" method="post">
                             {% csrf_token %}
-                            <!-- 基本信息 -->
+                            <!-- Basic Information -->
                             <div class="form-section">
                                 <h4 class="form-section-title">
                                     <i class="fa fa-user-circle-o text-primary mr-2"></i>
@@ -426,7 +413,7 @@
                                 </div>
                             </div>
 
-                            <!-- 健康信息 -->
+                            <!-- Health Information -->
                             <div class="form-section">
                                 <h4 class="form-section-title">
                                     <i class="fa fa-medkit text-primary mr-2"></i>
@@ -460,7 +447,6 @@
                                         <input type="text" id="allergy-other-text" name="allergy_other_text" placeholder="Please specify other allergies" class="form-input">
                                     </div>
                                 </div>
-
                                 <div class="mt-4">
                                     <label class="form-label">Health Conditions</label>
                                     <div class="checkbox-group">
@@ -491,7 +477,7 @@
                                 </div>
                             </div>
 
-                            <!-- 饮食偏好 -->
+                            <!-- Dietary Preferences -->
                             <div class="form-section">
                                 <h4 class="form-section-title">
                                     <i class="fa fa-cutlery text-primary mr-2"></i>
@@ -529,7 +515,6 @@
                                         <input type="text" id="favorite-other-food-text" name="favorite_other_food_text" placeholder="Please specify other preferred foods" class="form-input">
                                     </div>
                                 </div>
-
                                 <div class="mt-4">
                                     <label class="form-label">Dietary Restrictions</label>
                                     <div class="checkbox-group">
@@ -558,7 +543,6 @@
                                         <input type="text" id="diet-other-restriction-text" name="diet_other_restriction_text" placeholder="Please specify other dietary restrictions" class="form-input">
                                     </div>
                                 </div>
-
                                 <div class="mt-4">
                                     <label class="form-label">Taste Preferences</label>
                                     <div class="checkbox-group">
@@ -593,7 +577,7 @@
                                 </div>
                             </div>
 
-                            <!-- 生活习惯 -->
+                            <!-- Lifestyle -->
                             <div class="form-section">
                                 <h4 class="form-section-title">
                                     <i class="fa fa-heartbeat text-primary mr-2"></i>
@@ -623,7 +607,6 @@
                                         </select>
                                     </div>
                                 </div>
-
                                 <div class="mt-4">
                                     <label class="form-label">Health Goals</label>
                                     <div class="checkbox-group">
@@ -650,7 +633,7 @@
                                 </div>
                             </div>
 
-                            <!-- 提交按钮 -->
+                            <!-- Submit Button -->
                             <div class="flex justify-center mt-8 mb-6">
                                 <button type="submit" id="submit-button" class="px-8 py-3 bg-primary hover:bg-primary/90 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-1 flex items-center">
                                     <i class="fa fa-leaf mr-2"></i>
@@ -664,55 +647,47 @@
 
             <footer class="app-footer">
                 <div class="container text-center py-3">
-                    <small class="copyright">Copyright &copy; 2025. Food Nutrition Data Analysis All rights reserved.</small>
+                    <small class="copyright">Copyright © 2025. Food Nutrition Data Analysis All rights reserved.</small>
                 </div>
-            </footer><!--//app-footer-->
-        </div><!--//app-content-->
-    </div><!--//app-wrapper--> 
+            </footer>
+        </div>
+    </div>
 
     {% if recommended_foods is not None %}
-        {% if recommended_foods %}
-            <div class="app-content">
+        <div class="app-content">
+            {% if recommended_foods %}
                 <h3 class="text-xl font-bold mb-4 text-gray-800 text-center">Recommended Foods for You:</h3>
                 <ul class="list-disc pl-5 text-gray-700 mx-auto max-w-2xl">
                     {% for food in recommended_foods %}
-                        <li>{{ food.Name }} - {{ food.Type }}</li>
+                        <li>{{ food.Name }} - {{ food.Type }} (Score: {{ food.score|floatformat:2 }})</li>
                     {% endfor %}
                 </ul>
-            </div>
-        {% else %}
-            <div class="app-content text-red-600 font-bold text-center">
-                No suitable foods found for your profile.
-            </div>
-        {% endif %}
+            {% else %}
+                <div class="text-red-600 font-bold text-center">
+                    No suitable foods found. Try adjusting your preferences or restrictions for more options.
+                </div>
+            {% endif %}
+        </div>
     {% endif %}
 
-    <!-- Javascript -->          
+    <!-- JavaScript -->
     <script src="/static/plugins/popper.min.js"></script>
-    <script src="/static/plugins/bootstrap/js/bootstrap.min.js"></script>  
-
-    <!-- Charts JS -->
-    <script src="/static/plugins/chart.js/chart.min.js"></script> 
-    <script src="/static/js/index-charts.js"></script> 
-    
-    <!-- Page Specific JS -->
-    <script src="/static/js/app.js"></script> 
+    <script src="/static/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/plugins/chart.js/chart.min.js"></script>
+    <script src="/static/js/index-charts.js"></script>
+    <script src="/static/js/app.js"></script>
     <script>
-        // 显示/隐藏"其他"选项的文本框
+        // Toggle "Other" input fields
         function setupOtherFieldToggle(checkboxId, containerId) {
             const checkbox = document.getElementById(checkboxId);
             const container = document.getElementById(containerId);
-
             if (checkbox && container) {
                 checkbox.addEventListener('change', function() {
+                    container.classList.toggle('hidden', !this.checked);
                     if (this.checked) {
-                        container.classList.remove('hidden');
-                        // 如果是输入框，自动聚焦
                         const input = container.querySelector('input');
                         if (input) input.focus();
                     } else {
-                        container.classList.add('hidden');
-                        // 取消选择时清空输入
                         const input = container.querySelector('input');
                         if (input) input.value = '';
                     }
@@ -720,9 +695,9 @@
             }
         }
 
-        // 设置所有"其他"选项的切换功能
+        // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
-            // 初始化其他字段的显示/隐藏
+            // Setup "Other" field toggles
             setupOtherFieldToggle('allergy-other', 'allergy-other-container');
             setupOtherFieldToggle('health-other', 'health-other-container');
             setupOtherFieldToggle('favorite-other-food', 'favorite-other-food-container');
@@ -730,7 +705,7 @@
             setupOtherFieldToggle('taste-other-taste', 'taste-other-taste-container');
             setupOtherFieldToggle('health-goal-other-goal', 'health-goal-other-goal-container');
 
-            // 添加表单元素的动画效果
+            // Add focus effects to form elements
             const formElements = document.querySelectorAll('select, input[type="checkbox"]');
             formElements.forEach(el => {
                 el.addEventListener('focus', function() {
@@ -741,14 +716,10 @@
                 });
             });
 
-            // 添加页面滚动时的导航栏效果
+            // Add header shadow on scroll
             const header = document.querySelector('header');
             window.addEventListener('scroll', function() {
-                if (window.scrollY > 10) {
-                    header.classList.add('shadow-md');
-                } else {
-                    header.classList.remove('shadow-md');
-                }
+                header.classList.toggle('shadow-md', window.scrollY > 10);
             });
         });
     </script>
