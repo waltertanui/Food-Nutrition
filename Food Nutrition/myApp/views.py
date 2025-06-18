@@ -4,7 +4,7 @@ from django.contrib import messages
 import logging
 from myApp.models import User, Foodinfo
 from .utils.error import *
-from .utils import  getHomeData
+from .utils import getHomeData
 from .utils.getPublicData import getAppleData
 import json
 
@@ -27,7 +27,6 @@ def login(request):
 
 def signup(request):
     if request.method == 'GET':
-
         return render(request, 'signup.html')
     else:
         uname = request.POST.get('signup-name')
@@ -109,7 +108,7 @@ def index(request):
     return render(request, 'index.html', {
         'userinfo': userinfo,
         'apple_data_json': json.dumps(apple_data, ensure_ascii=False),
-        'apple_data_list_json': json.dumps(apple_data_list, ensure_ascii=False),  # Add the list of all apple data
+        'apple_data_list_json': json.dumps(apple_data_list, ensure_ascii=False),
         'coconut_data_json': json.dumps(coconut_data, ensure_ascii=False),
         'has_coconut_data': has_coconut_data
     })
@@ -227,11 +226,15 @@ def recommend(request):
     uname = request.session.get('name')
     userinfo = User.objects.get(name=uname)
     if request.method == 'POST':
+        # Basic Information
         age = int(request.POST.get('age', 25))
         gender = request.POST.get('gender', 'male')
         height = float(request.POST.get('height', 170))
         weight = float(request.POST.get('weight', 65))
+        
+        # Health Information
         exercise_frequency = request.POST.get('exercise_frequency', 'never')
+        sleep_hours = request.POST.get('sleep_hours', '7_8')
         allergies = request.POST.getlist('allergies')
         allergy_other = request.POST.get('allergy_other_text', '').strip()
         if allergy_other:
@@ -240,14 +243,39 @@ def recommend(request):
         health_other = request.POST.get('health_other_text', '').strip()
         if health_other:
             health_conditions.append(health_other)
-        # You can parse more fields as needed
+        
+        # Dietary Preferences
+        favorite_foods = request.POST.getlist('favorite_foods')
+        favorite_other_food = request.POST.get('favorite_other_food_text', '').strip()
+        if favorite_other_food:
+            favorite_foods.append(favorite_other_food)
+        diet_restrictions = request.POST.getlist('diet_restrictions')
+        diet_other_restriction = request.POST.get('diet_other_restriction_text', '').strip()
+        if diet_other_restriction:
+            diet_restrictions.append(diet_other_restriction)
+        taste_preferences = request.POST.getlist('taste_preferences')
+        taste_other_taste = request.POST.get('taste_other_taste_text', '').strip()
+        if taste_other_taste:
+            taste_preferences.append(taste_other_taste)
+        
+        # Lifestyle
+        health_goals = request.POST.getlist('health_goals')
+        health_goal_other = request.POST.get('health_goal_other_text', '').strip()
+        if health_goal_other:
+            health_goals.append(health_goal_other)
+        
+        # Fetch all foods
         foods = list(Foodinfo.objects.all().values())
-        # Simple recommend_foods logic inline (replace with import if you have a util)
+
+        # Calculate BMR and daily energy needs
         def calculate_bmr(age, gender, height, weight):
             if gender == 'male':
                 return 10 * weight + 6.25 * height - 5 * age + 5
-            else:
+            elif gender == 'female':
                 return 10 * weight + 6.25 * height - 5 * age - 161
+            else:
+                return 10 * weight + 6.25 * height - 5 * age - 78  # Average for 'other'
+
         def calculate_daily_energy(bmr, exercise_frequency):
             activity_factors = {
                 "never": 1.2,
@@ -257,31 +285,119 @@ def recommend(request):
                 "always": 1.9
             }
             return bmr * activity_factors.get(exercise_frequency, 1.2)
+
         bmr = calculate_bmr(age, gender, height, weight)
         daily_energy = calculate_daily_energy(bmr, exercise_frequency)
-        # Example macronutrient targets
-        target_protein = daily_energy * 0.15 / 4
-        target_fat = daily_energy * 0.3 / 9
-        target_cho = daily_energy * 0.55 / 4
+
+        # Adjust energy based on health goals
+        if 'weight_loss' in health_goals:
+            daily_energy *= 0.85  # Reduce by 15% for weight loss
+        elif 'weight_gain' in health_goals:
+            daily_energy *= 1.15  # Increase by 15% for weight gain
+
+        # Macronutrient targets
+        target_protein = daily_energy * 0.15 / 4  # 15% of energy from protein
+        target_fat = daily_energy * 0.3 / 9       # 30% from fat
+        target_cho = daily_energy * 0.55 / 4      # 55% from carbs
+
+        # Adjust sleep impact (simplified)
+        sleep_adjustment = 1.0
+        if sleep_hours in ['under_6']:
+            sleep_adjustment = 0.95  # Slightly reduce recommendations due to poor sleep
+        elif sleep_hours in ['over_9']:
+            sleep_adjustment = 1.05  # Slightly increase for high sleep
+
         recommended = []
         for food in foods:
             # Exclude allergens
-            if any(allergy and allergy in food['Name'] for allergy in allergies):
+            if any(allergy.lower() in food['Name'].lower() or allergy.lower() in (food.get('Type', '')).lower() for allergy in allergies):
                 continue
-            # Example: filter for diabetes/hypertension
-            if any('糖尿病' in cond for cond in health_conditions):
-                try:
+
+            # Filter based on health conditions
+            try:
+                if 'diabetes' in health_conditions or '糖尿病' in health_conditions:
                     if float(food.get('CHO', 0)) >= 10:
                         continue
-                except:
-                    continue
-            if any('高血压' in cond for cond in health_conditions):
-                try:
+                if 'hypertension' in health_conditions or '高血压' in health_conditions:
                     if float(food.get('Na', 0)) >= 100:
                         continue
-                except:
-                    continue
-            recommended.append(food)
+                if 'heart_disease' in health_conditions:
+                    if float(food.get('Fat', 0)) >= 5 or float(food.get('Cholesterol', 0)) >= 50:
+                        continue
+            except (ValueError, TypeError):
+                continue
+
+            # Filter based on dietary restrictions
+            try:
+                if 'vegetarian' in diet_restrictions:
+                    if 'meat' in food['Name'].lower() or 'fish' in food['Name'].lower() or food.get('Type', '').lower() in ['meat', 'fish']:
+                        continue
+                if 'vegan' in diet_restrictions:
+                    if any(term in food['Name'].lower() or term in food.get('Type', '').lower() for term in ['meat', 'fish', 'dairy', 'egg']):
+                        continue
+                if 'low_salt' in diet_restrictions:
+                    if float(food.get('Na', 0)) >= 50:
+                        continue
+                if 'low_fat' in diet_restrictions:
+                    if float(food.get('Fat', 0)) >= 3:
+                        continue
+            except (ValueError, TypeError):
+                continue
+
+            # Prioritize favorite foods and taste preferences
+            score = 0
+            food_type = food.get('Type', '').lower()
+            food_name = food['Name'].lower()
+            
+            # Boost score for favorite foods
+            if favorite_foods:
+                for fav in favorite_foods:
+                    if fav.lower() in food_type or fav.lower() in food_name:
+                        score += 10
+                    elif fav.lower() == 'fruits' and 'fruit' in food_type:
+                        score += 10
+                    elif fav.lower() == 'vegetables' and 'vegetable' in food_type:
+                        score += 10
+                    elif fav.lower() == 'grains' and 'grain' in food_type:
+                        score += 10
+                    elif fav.lower() == 'snacks' and 'snack' in food_type:
+                        score += 10
+
+            # Boost score for taste preferences (simplified mapping)
+            if taste_preferences:
+                for taste in taste_preferences:
+                    if taste.lower() == 'sweet' and any(term in food_name for term in ['sugar', 'honey', 'sweet']):
+                        score += 5
+                    elif taste.lower() == 'salty' and float(food.get('Na', 0)) > 50:
+                        score += 5
+                    elif taste.lower() == 'sour' and float(food.get('VitaminC', 0)) > 10:  # Proxy for sourness
+                        score += 5
+                    elif taste.lower() == 'spicy' and any(term in food_name for term in ['chili', 'pepper']):
+                        score += 5
+                    elif taste.lower() == 'bitter' and any(term in food_name for term in ['bitter', 'kale']):
+                        score += 5
+
+            # Adjust based on nutritional needs
+            try:
+                protein = float(food.get('Protein', 0))
+                fat = float(food.get('Fat', 0))
+                cho = float(food.get('CHO', 0))
+                if (protein <= target_protein * 0.2 and fat <= target_fat * 0.2 and cho <= target_cho * 0.2):
+                    score += 5  # Favor foods that align with macro targets
+            except (ValueError, TypeError):
+                pass
+
+            # Apply sleep adjustment
+            score *= sleep_adjustment
+
+            # Add food with score
+            if score > 0 or not (favorite_foods or taste_preferences):  # Include all foods if no preferences
+                food['score'] = score
+                recommended.append(food)
+
+        # Sort by score (highest first) and limit to top 10
+        recommended = sorted(recommended, key=lambda x: x['score'], reverse=True)[:10]
+
         return render(request, 'recommend.html', {
             'userinfo': userinfo,
             'recommended_foods': recommended
@@ -299,14 +415,3 @@ def help(request):
 def apple_data_view(request):
     apple_data = getAppleData()
     return render(request, 'index.html', {'apple_data': apple_data})
-
-
-
-
-
-
-
-
-
-
-
