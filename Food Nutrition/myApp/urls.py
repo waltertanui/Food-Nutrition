@@ -13,8 +13,8 @@ urlpatterns=[
     path('foodData/',views.foodData,name='foodData'),
     path('charts/',views.charts,name='charts'),
     path('recommend/',views.recommend,name='recommend'),
-    path('help/',views.help,name='help')
-
+    path('help/',views.help,name='help'),
+    path('weekly-recipes/', views.weekly_recipes, name='weekly_recipes'),
 ]
 
 

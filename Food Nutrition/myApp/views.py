@@ -468,3 +468,6 @@ def help(request):
 def apple_data_view(request):
     apple_data = getAppleData()
     return render(request, 'index.html', {'apple_data': apple_data})
+
+def weekly_recipes(request):
+    return render(request, 'weekly_recipes.html')

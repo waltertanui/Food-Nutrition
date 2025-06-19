@@ -103,6 +103,39 @@
             }
         }
     </style>
+    <style>
+        .app-header {
+            margin-left: 250px;
+            width: calc(100% - 250px);
+        }
+        .app-content {
+            margin-left: 250px;
+            padding: 2rem 1rem;
+        }
+        .container-xl {
+            max-width: 1140px;
+            margin: 0 auto;
+        }
+        .app-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .app-content {
+            flex: 1 0 auto;
+        }
+        .app-footer {
+            flex-shrink: 0;
+            margin-left: 250px;
+            width: calc(100% - 250px);
+        }
+        @media (max-width: 991px) {
+            .app-header, .app-content, .app-footer {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body class="app">
@@ -307,6 +340,16 @@
                                 <span class="nav-link-text">Nutritional Questions</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/weekly-recipes/">
+                                <span class="nav-icon">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar-week" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v1H1V3zm0 2v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5H1zm2.5 3a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2a.5.5 0 0 1 .5-.5zm3 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2a.5.5 0 0 1 .5-.5zm3 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2a.5.5 0 0 1 .5-.5z"/>
+                                    </svg>
+                                </span>
+                                <span class="nav-link-text">每周健康食谱</span>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <div class="app-sidepanel-footer">
@@ -332,325 +375,326 @@
 
     <div class="app-wrapper">
         <div class="app-content">
-            <main class="container mx-auto">
-                <div>
-                    <!-- Page Title -->
-                    <div class="text-center mb-8">
-                        <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-gray-800 mb-3">
-                            Personalized Food Recommendation
-                        </h2>
-                        <p class="text-gray-600 max-w-2xl mx-auto">
-                            Fill in the information below to get personalized healthy eating advice. We will provide the most suitable food recommendations based on your physical condition, preferences, and goals.
-                        </p>
-                    </div>
-
-                    <!-- Form Card -->
-                    <div class="bg-white rounded-2xl shadow-card hover:shadow-card-hover transition-all duration-300 overflow-hidden">
-                        <!-- Progress Indicator -->
-                        <div class="bg-primary text-white p-4">
-                            <div class="flex justify-between items-center">
-                                <h3 class="font-semibold">Personal Information Collection</h3>
-                                <div class="flex items-center space-x-1">
-                                    <span class="w-3 h-3 rounded-full bg-white"></span>
-                                    <span class="w-3 h-3 rounded-full bg-white/50"></span>
-                                    <span class="w-3 h-3 rounded-full bg-white/50"></span>
-                                </div>
-                            </div>
+            <div class="container-xl">
+                <main>
+                    <div>
+                        <!-- Page Title -->
+                        <div class="text-center mb-8">
+                            <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-gray-800 mb-3">
+                                Personalized Food Recommendation
+                            </h2>
+                            <p class="text-gray-600 max-w-2xl mx-auto">
+                                Fill in the information below to get personalized healthy eating advice. We will provide the most suitable food recommendations based on your physical condition, preferences, and goals.
+                            </p>
                         </div>
 
-                        <!-- Form Content -->
-                        <form id="food-recommendation-form" method="post">
-                            {% csrf_token %}
-                            <!-- Basic Information -->
-                            <div class="form-section">
-                                <h4 class="form-section-title">
-                                    <i class="fa fa-user-circle-o text-primary mr-2"></i>
-                                    Basic Information
-                                </h4>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <label for="age" class="form-label">Age</label>
-                                        <select id="age" name="age" class="form-select" required>
-                                            <option value="">Please select</option>
-                                            <option value="8">0 - 12 years</option>
-                                            <option value="16">13 - 18 years</option>
-                                            <option value="25">19 - 30 years</option>
-                                            <option value="40">31 - 50 years</option>
-                                            <option value="60">51 years and above</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label for="gender" class="form-label">Gender</label>
-                                        <select id="gender" name="gender" class="form-select" required>
-                                            <option value="">Please select</option>
-                                            <option value="male">Male</option>
-                                            <option value="female">Female</option>
-                                            <option value="other">Other</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label for="height" class="form-label">Height (cm)</label>
-                                        <select id="height" name="height" class="form-select" required>
-                                            <option value="">Please select</option>
-                                            <option value="145">Below 150cm</option>
-                                            <option value="158">150 - 165cm</option>
-                                            <option value="173">166 - 180cm</option>
-                                            <option value="190">181 - 200cm</option>
-                                            <option value="205">Above 200cm</option>
-                                        </select>
-                                    </div>
-                                    <div>
-                                        <label for="weight" class="form-label">Weight (kg)</label>
-                                        <select id="weight" name="weight" class="form-select" required>
-                                            <option value="">Please select</option>
-                                            <option value="35">Below 40kg</option>
-                                            <option value="48">40 - 55kg</option>
-                                            <option value="63">56 - 70kg</option>
-                                            <option value="80">71 - 90kg</option>
-                                            <option value="95">Above 90kg</option>
-                                        </select>
+                        <!-- Form Card -->
+                        <div class="bg-white rounded-2xl shadow-card hover:shadow-card-hover transition-all duration-300 overflow-hidden">
+                            <!-- Progress Indicator -->
+                            <div class="bg-primary text-white p-4">
+                                <div class="flex justify-between items-center">
+                                    <h3 class="font-semibold">Personal Information Collection</h3>
+                                    <div class="flex items-center space-x-1">
+                                        <span class="w-3 h-3 rounded-full bg-white"></span>
+                                        <span class="w-3 h-3 rounded-full bg-white/50"></span>
+                                        <span class="w-3 h-3 rounded-full bg-white/50"></span>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Health Information -->
-                            <div class="form-section">
-                                <h4 class="form-section-title">
-                                    <i class="fa fa-medkit text-primary mr-2"></i>
-                                    Health Information
-                                </h4>
-                                <div>
-                                    <label class="form-label">Allergy Information</label>
-                                    <div class="checkbox-group">
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="allergy-nuts" name="allergies" value="nuts">
-                                            <label for="allergy-nuts" class="cursor-pointer">Nuts</label>
+                            <!-- Form Content -->
+                            <form id="food-recommendation-form" method="post">
+                                {% csrf_token %}
+                                <!-- Basic Information -->
+                                <div class="form-section">
+                                    <h4 class="form-section-title">
+                                        <i class="fa fa-user-circle-o text-primary mr-2"></i>
+                                        Basic Information
+                                    </h4>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label for="age" class="form-label">Age</label>
+                                            <select id="age" name="age" class="form-select" required>
+                                                <option value="">Please select</option>
+                                                <option value="8">0 - 12 years</option>
+                                                <option value="16">13 - 18 years</option>
+                                                <option value="25">19 - 30 years</option>
+                                                <option value="40">31 - 50 years</option>
+                                                <option value="60">51 years and above</option>
+                                            </select>
                                         </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="allergy-dairy" name="allergies" value="dairy">
-                                            <label for="allergy-dairy" class="cursor-pointer">Dairy</label>
+                                        <div>
+                                            <label for="gender" class="form-label">Gender</label>
+                                            <select id="gender" name="gender" class="form-select" required>
+                                                <option value="">Please select</option>
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>
+                                                <option value="other">Other</option>
+                                            </select>
                                         </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="allergy-gluten" name="allergies" value="gluten">
-                                            <label for="allergy-gluten" class="cursor-pointer">Gluten</label>
+                                        <div>
+                                            <label for="height" class="form-label">Height (cm)</label>
+                                            <select id="height" name="height" class="form-select" required>
+                                                <option value="">Please select</option>
+                                                <option value="145">Below 150cm</option>
+                                                <option value="158">150 - 165cm</option>
+                                                <option value="173">166 - 180cm</option>
+                                                <option value="190">181 - 200cm</option>
+                                                <option value="205">Above 200cm</option>
+                                            </select>
                                         </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="allergy-seafood" name="allergies" value="seafood">
-                                            <label for="allergy-seafood" class="cursor-pointer">Seafood</label>
+                                        <div>
+                                            <label for="weight" class="form-label">Weight (kg)</label>
+                                            <select id="weight" name="weight" class="form-select" required>
+                                                <option value="">Please select</option>
+                                                <option value="35">Below 40kg</option>
+                                                <option value="48">40 - 55kg</option>
+                                                <option value="63">56 - 70kg</option>
+                                                <option value="80">71 - 90kg</option>
+                                                <option value="95">Above 90kg</option>
+                                            </select>
                                         </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="allergy-other" name="allergies" value="other">
-                                            <label for="allergy-other" class="cursor-pointer">Other</label>
-                                        </div>
-                                    </div>
-                                    <div id="allergy-other-container" class="hidden mt-2">
-                                        <input type="text" id="allergy-other-text" name="allergy_other_text" placeholder="Please specify other allergies" class="form-input">
                                     </div>
                                 </div>
-                                <div class="mt-4">
-                                    <label class="form-label">Health Conditions</label>
-                                    <div class="checkbox-group">
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="health-normal" name="health_conditions" value="normal">
-                                            <label for="health-normal" class="cursor-pointer">Healthy, no special conditions</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="health-diabetes" name="health_conditions" value="diabetes">
-                                            <label for="health-diabetes" class="cursor-pointer">Diabetes</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="health-hypertension" name="health_conditions" value="hypertension">
-                                            <label for="health-hypertension" class="cursor-pointer">Hypertension</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="health-heart-disease" name="health_conditions" value="heart_disease">
-                                            <label for="health-heart-disease" class="cursor-pointer">Heart Disease</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="health-other" name="health_conditions" value="other">
-                                            <label for="health-other" class="cursor-pointer">Other</label>
-                                        </div>
-                                    </div>
-                                    <div id="health-other-container" class="hidden mt-2">
-                                        <input type="text" id="health-other-text" name="health_other_text" placeholder="Please specify other health conditions" class="form-input">
-                                    </div>
-                                </div>
-                            </div>
 
-                            <!-- Dietary Preferences -->
-                            <div class="form-section">
-                                <h4 class="form-section-title">
-                                    <i class="fa fa-cutlery text-primary mr-2"></i>
-                                    Dietary Preferences
-                                </h4>
-                                <div>
-                                    <label class="form-label">Preferred Foods</label>
-                                    <div class="checkbox-group">
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="favorite-meat" name="favorite_foods" value="meat">
-                                            <label for="favorite-meat" class="cursor-pointer">Meat</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="favorite-vegetables" name="favorite_foods" value="vegetables">
-                                            <label for="favorite-vegetables" class="cursor-pointer">Vegetables</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="favorite-fruits" name="favorite_foods" value="fruits">
-                                            <label for="favorite-fruits" class="cursor-pointer">Fruits</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="favorite-grains" name="favorite_foods" value="grains">
-                                            <label for="favorite-grains" class="cursor-pointer">Grains</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="favorite-snacks" name="favorite_foods" value="snacks">
-                                            <label for="favorite-snacks" class="cursor-pointer">Snacks</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="favorite-other-food" name="favorite_foods" value="other">
-                                            <label for="favorite-other-food" class="cursor-pointer">Other</label>
-                                        </div>
-                                    </div>
-                                    <div id="favorite-other-food-container" class="hidden mt-2">
-                                        <input type="text" id="favorite-other-food-text" name="favorite_other_food_text" placeholder="Please specify other preferred foods" class="form-input">
-                                    </div>
-                                </div>
-                                <div class="mt-4">
-                                    <label class="form-label">Dietary Restrictions</label>
-                                    <div class="checkbox-group">
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="diet-vegetarian" name="diet_restrictions" value="vegetarian">
-                                            <label for="diet-vegetarian" class="cursor-pointer">Vegetarian</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="diet-vegan" name="diet_restrictions" value="vegan">
-                                            <label for="diet-vegan" class="cursor-pointer">Vegan</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="diet-low-salt" name="diet_restrictions" value="low_salt">
-                                            <label for="diet-low-salt" class="cursor-pointer">Low Salt Diet</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="diet-low-fat" name="diet_restrictions" value="low_fat">
-                                            <label for="diet-low-fat" class="cursor-pointer">Low Fat Diet</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="diet-other-restriction" name="diet_restrictions" value="other">
-                                            <label for="diet-other-restriction" class="cursor-pointer">Other</label>
-                                        </div>
-                                    </div>
-                                    <div id="diet-other-restriction-container" class="hidden mt-2">
-                                        <input type="text" id="diet-other-restriction-text" name="diet_other_restriction_text" placeholder="Please specify other dietary restrictions" class="form-input">
-                                    </div>
-                                </div>
-                                <div class="mt-4">
-                                    <label class="form-label">Taste Preferences</label>
-                                    <div class="checkbox-group">
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="taste-sweet" name="taste_preferences" value="sweet">
-                                            <label for="taste-sweet" class="cursor-pointer">Sweet</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="taste-salty" name="taste_preferences" value="salty">
-                                            <label for="taste-salty" class="cursor-pointer">Salty</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="taste-sour" name="taste_preferences" value="sour">
-                                            <label for="taste-sour" class="cursor-pointer">Sour</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="taste-spicy" name="taste_preferences" value="spicy">
-                                            <label for="taste-spicy" class="cursor-pointer">Spicy</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="taste-bitter" name="taste_preferences" value="bitter">
-                                            <label for="taste-bitter" class="cursor-pointer">Bitter</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="taste-other-taste" name="taste_preferences" value="other">
-                                            <label for="taste-other-taste" class="cursor-pointer">Other</label>
-                                        </div>
-                                    </div>
-                                    <div id="taste-other-taste-container" class="hidden mt-2">
-                                        <input type="text" id="taste-other-taste-text" name="taste_other_taste_text" placeholder="Please specify other taste preferences" class="form-input">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Lifestyle -->
-                            <div class="form-section">
-                                <h4 class="form-section-title">
-                                    <i class="fa fa-heartbeat text-primary mr-2"></i>
-                                    Lifestyle
-                                </h4>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <!-- Health Information -->
+                                <div class="form-section">
+                                    <h4 class="form-section-title">
+                                        <i class="fa fa-medkit text-primary mr-2"></i>
+                                        Health Information
+                                    </h4>
                                     <div>
-                                        <label for="exercise-frequency" class="form-label">Exercise Frequency</label>
-                                        <select id="exercise-frequency" name="exercise_frequency" class="form-select" required>
-                                            <option value="">Please select</option>
-                                            <option value="never">Never</option>
-                                            <option value="rarely">Rarely (1-2 times/week)</option>
-                                            <option value="sometimes">Sometimes (3-4 times/week)</option>
-                                            <option value="often">Often (5-6 times/week)</option>
-                                            <option value="always">Always (every day)</option>
-                                        </select>
+                                        <label class="form-label">Allergy Information</label>
+                                        <div class="checkbox-group">
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="allergy-nuts" name="allergies" value="nuts">
+                                                <label for="allergy-nuts" class="cursor-pointer">Nuts</label>
+                                            </div>
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="allergy-dairy" name="allergies" value="dairy">
+                                                <label for="allergy-dairy" class="cursor-pointer">Dairy</label>
+                                            </div>
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="allergy-gluten" name="allergies" value="gluten">
+                                                <label for="allergy-gluten" class="cursor-pointer">Gluten</label>
+                                            </div>
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="allergy-seafood" name="allergies" value="seafood">
+                                                <label for="allergy-seafood" class="cursor-pointer">Seafood</label>
+                                            </div>
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="allergy-other" name="allergies" value="other">
+                                                <label for="allergy-other" class="cursor-pointer">Other</label>
+                                            </div>
+                                        </div>
+                                        <div id="allergy-other-container" class="hidden mt-2">
+                                            <input type="text" id="allergy-other-text" name="allergy_other_text" placeholder="Please specify other allergies" class="form-input">
+                                        </div>
                                     </div>
-                                    <div>
-                                        <label for="sleep-hours" class="form-label">Sleep Hours</label>
-                                        <select id="sleep-hours" name="sleep_hours" class="form-select" required>
-                                            <option value="">Please select</option>
-                                            <option value="under_6">Less than 6 hours</option>
-                                            <option value="6_7">6 - 7 hours</option>
-                                            <option value="7_8">7 - 8 hours</option>
-                                            <option value="8_9">8 - 9 hours</option>
-                                            <option value="over_9">More than 9 hours</option>
-                                        </select>
+                                    <div class="mt-4">
+                                        <label class="form-label">Health Conditions</label>
+                                        <div class="checkbox-group">
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="health-normal" name="health_conditions" value="normal">
+                                                <label for="health-normal" class="cursor-pointer">Healthy, no special conditions</label>
+                                            </div>
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="health-diabetes" name="health_conditions" value="diabetes">
+                                                <label for="health-diabetes" class="cursor-pointer">Diabetes</label>
+                                            </div>
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="health-hypertension" name="health_conditions" value="hypertension">
+                                                <label for="health-hypertension" class="cursor-pointer">Hypertension</label>
+                                            </div>
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="health-heart-disease" name="health_conditions" value="heart_disease">
+                                                <label for="health-heart-disease" class="cursor-pointer">Heart Disease</label>
+                                            </div>
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="health-other" name="health_conditions" value="other">
+                                                <label for="health-other" class="cursor-pointer">Other</label>
+                                            </div>
+                                        </div>
+                                        <div id="health-other-container" class="hidden mt-2">
+                                            <input type="text" id="health-other-text" name="health_other_text" placeholder="Please specify other health conditions" class="form-input">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="mt-4">
-                                    <label class="form-label">Health Goals</label>
-                                    <div class="checkbox-group">
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="health-goal-weight-loss" name="health_goals" value="weight_loss">
-                                            <label for="health-goal-weight-loss" class="cursor-pointer">Weight Loss</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="health-goal-weight-gain" name="health_goals" value="weight_gain">
-                                            <label for="health-goal-weight-gain" class="cursor-pointer">Weight Gain</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="health-goal-improve-health" name="health_goals" value="improve_health">
-                                            <label for="health-goal-improve-health" class="cursor-pointer">Improve Health</label>
-                                        </div>
-                                        <div class="checkbox-item">
-                                            <input type="checkbox" id="health-goal-other-goal" name="health_goals" value="other">
-                                            <label for="health-goal-other-goal" class="cursor-pointer">Other</label>
-                                        </div>
-                                    </div>
-                                    <div id="health-goal-other-goal-container" class="hidden mt-2">
-                                        <input type="text" id="health-goal-other-goal-text" name="health_goal_other_text" placeholder="Please specify other health goals" class="form-input">
-                                    </div>
-                                </div>
-                            </div>
 
-                            <!-- Submit Button -->
-                            <div class="flex justify-center mt-8 mb-6">
-                                <button type="submit" id="submit-button" class="px-8 py-3 bg-primary hover:bg-primary/90 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-1 flex items-center">
-                                    <i class="fa fa-leaf mr-2"></i>
-                                    Get Personalized Recommendation
-                                </button>
-                            </div>
-                        </form>
+                                <!-- Dietary Preferences -->
+                                <div class="form-section">
+                                    <h4 class="form-section-title">
+                                        <i class="fa fa-cutlery text-primary mr-2"></i>
+                                        Dietary Preferences
+                                    </h4>
+                                    <div>
+                                        <label class="form-label">Preferred Foods</label>
+                                        <div class="checkbox-group">
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="favorite-meat" name="favorite_foods" value="meat">
+                                                <label for="favorite-meat" class="cursor-pointer">Meat</label>
+                                            </div>
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="favorite-vegetables" name="favorite_foods" value="vegetables">
+                                                <label for="favorite-vegetables" class="cursor-pointer">Vegetables</label>
+                                            </div>
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="favorite-fruits" name="favorite_foods" value="fruits">
+                                                <label for="favorite-fruits" class="cursor-pointer">Fruits</label>
+                                            </div>
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="favorite-grains" name="favorite_foods" value="grains">
+                                                <label for="favorite-grains" class="cursor-pointer">Grains</label>
+                                            </div>
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="favorite-snacks" name="favorite_foods" value="snacks">
+                                                <label for="favorite-snacks" class="cursor-pointer">Snacks</label>
+                                            </div>
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="favorite-other-food" name="favorite_foods" value="other">
+                                                <label for="favorite-other-food" class="cursor-pointer">Other</label>
+                                            </div>
+                                        </div>
+                                        <div id="favorite-other-food-container" class="hidden mt-2">
+                                            <input type="text" id="favorite-other-food-text" name="favorite_other_food_text" placeholder="Please specify other preferred foods" class="form-input">
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <label class="form-label">Dietary Restrictions</label>
+                                        <div class="checkbox-group">
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="diet-vegetarian" name="diet_restrictions" value="vegetarian">
+                                                <label for="diet-vegetarian" class="cursor-pointer">Vegetarian</label>
+                                            </div>
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="diet-vegan" name="diet_restrictions" value="vegan">
+                                                <label for="diet-vegan" class="cursor-pointer">Vegan</label>
+                                            </div>
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="diet-low-salt" name="diet_restrictions" value="low_salt">
+                                                <label for="diet-low-salt" class="cursor-pointer">Low Salt Diet</label>
+                                            </div>
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="diet-low-fat" name="diet_restrictions" value="low_fat">
+                                                <label for="diet-low-fat" class="cursor-pointer">Low Fat Diet</label>
+                                            </div>
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="diet-other-restriction" name="diet_restrictions" value="other">
+                                                <label for="diet-other-restriction" class="cursor-pointer">Other</label>
+                                            </div>
+                                        </div>
+                                        <div id="diet-other-restriction-container" class="hidden mt-2">
+                                            <input type="text" id="diet-other-restriction-text" name="diet_other_restriction_text" placeholder="Please specify other dietary restrictions" class="form-input">
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <label class="form-label">Taste Preferences</label>
+                                        <div class="checkbox-group">
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="taste-sweet" name="taste_preferences" value="sweet">
+                                                <label for="taste-sweet" class="cursor-pointer">Sweet</label>
+                                            </div>
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="taste-salty" name="taste_preferences" value="salty">
+                                                <label for="taste-salty" class="cursor-pointer">Salty</label>
+                                            </div>
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="taste-sour" name="taste_preferences" value="sour">
+                                                <label for="taste-sour" class="cursor-pointer">Sour</label>
+                                            </div>
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="taste-spicy" name="taste_preferences" value="spicy">
+                                                <label for="taste-spicy" class="cursor-pointer">Spicy</label>
+                                            </div>
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="taste-bitter" name="taste_preferences" value="bitter">
+                                                <label for="taste-bitter" class="cursor-pointer">Bitter</label>
+                                            </div>
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="taste-other-taste" name="taste_preferences" value="other">
+                                                <label for="taste-other-taste" class="cursor-pointer">Other</label>
+                                            </div>
+                                        </div>
+                                        <div id="taste-other-taste-container" class="hidden mt-2">
+                                            <input type="text" id="taste-other-taste-text" name="taste_other_taste_text" placeholder="Please specify other taste preferences" class="form-input">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Lifestyle -->
+                                <div class="form-section">
+                                    <h4 class="form-section-title">
+                                        <i class="fa fa-heartbeat text-primary mr-2"></i>
+                                        Lifestyle
+                                    </h4>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label for="exercise-frequency" class="form-label">Exercise Frequency</label>
+                                            <select id="exercise-frequency" name="exercise_frequency" class="form-select" required>
+                                                <option value="">Please select</option>
+                                                <option value="never">Never</option>
+                                                <option value="rarely">Rarely (1-2 times/week)</option>
+                                                <option value="sometimes">Sometimes (3-4 times/week)</option>
+                                                <option value="often">Often (5-6 times/week)</option>
+                                                <option value="always">Always (every day)</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label for="sleep-hours" class="form-label">Sleep Hours</label>
+                                            <select id="sleep-hours" name="sleep_hours" class="form-select" required>
+                                                <option value="">Please select</option>
+                                                <option value="under_6">Less than 6 hours</option>
+                                                <option value="6_7">6 - 7 hours</option>
+                                                <option value="7_8">7 - 8 hours</option>
+                                                <option value="8_9">8 - 9 hours</option>
+                                                <option value="over_9">More than 9 hours</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <label class="form-label">Health Goals</label>
+                                        <div class="checkbox-group">
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="health-goal-weight-loss" name="health_goals" value="weight_loss">
+                                                <label for="health-goal-weight-loss" class="cursor-pointer">Weight Loss</label>
+                                            </div>
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="health-goal-weight-gain" name="health_goals" value="weight_gain">
+                                                <label for="health-goal-weight-gain" class="cursor-pointer">Weight Gain</label>
+                                            </div>
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="health-goal-improve-health" name="health_goals" value="improve_health">
+                                                <label for="health-goal-improve-health" class="cursor-pointer">Improve Health</label>
+                                            </div>
+                                            <div class="checkbox-item">
+                                                <input type="checkbox" id="health-goal-other-goal" name="health_goals" value="other">
+                                                <label for="health-goal-other-goal" class="cursor-pointer">Other</label>
+                                            </div>
+                                        </div>
+                                        <div id="health-goal-other-goal-container" class="hidden mt-2">
+                                            <input type="text" id="health-goal-other-goal-text" name="health_goal_other_text" placeholder="Please specify other health goals" class="form-input">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="flex justify-center mt-8 mb-6">
+                                    <button type="submit" id="submit-button" class="px-8 py-3 bg-primary hover:bg-primary/90 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-1 flex items-center">
+                                        <i class="fa fa-leaf mr-2"></i>
+                                        Get Personalized Recommendation
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            </main>
-
-            <footer class="app-footer">
-                <div class="container text-center py-3">
-                    <small class="copyright">Copyright © 2025. Food Nutrition Data Analysis All rights reserved.</small>
-                </div>
-            </footer>
+                </main>
+            </div>
         </div>
+        <footer class="app-footer">
+            <div class="container text-center py-3">
+                <small class="copyright">Copyright © 2025.食品营养数据分析 All rights reserved.</small>
+            </div>
+        </footer>
     </div>
 
     {% if recommended_foods is not None %}
