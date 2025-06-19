@@ -154,7 +154,7 @@
                         </div>
                         <div class="app-search-box col">
                             <form class="app-search-form">
-                                <input type="text" placeholder="Enter food name" name="search" class="form-control search-input">
+                                <input type="text" placeholder="请输入食物名称" name="search" class="form-control search-input">
                                 <button type="submit" class="btn search-btn btn-primary" value="Search"><i class="fas fa-search"></i></button>
                             </form>
                         </div>
@@ -253,9 +253,9 @@
                             <div class="app-utility-item app-user-dropdown dropdown">
                                 <a class="dropdown-toggle" id="user-dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false"><img src="/media/{{ userinfo.avatar }}" alt="user profile"></a>
                                 <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
-                                    <li><a class="dropdown-item" href="/myApp/account">My Account</a></li>
+                                    <li><a class="dropdown-item" href="/myApp/account">我的</a></li>
                                     <hr>
-                                    <li><a class="dropdown-item" href="/myApp/logout">Logout</a></li>
+                                    <li><a class="dropdown-item" href="/myApp/logout">退出登录</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -268,7 +268,7 @@
             <div class="sidepanel-inner d-flex flex-column">
                 <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">×</a>
                 <div class="app-branding">
-                    <a class="app-logo" href="/myApp/index"><img class="logo-icon mr-2" src="/static/images/logo.png" alt="logo"><span class="logo-text">Food Nutrition Data Analysis</span></a>
+                    <a class="app-logo" href="/myApp/index"><img class="logo-icon mr-2" src="/static/images/logo.png" alt="logo"><span class="logo-text">食品营养数据分析</span></a>
                 </div>
                 <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
                     <ul class="app-menu list-unstyled accordion" id="menu-accordion">
@@ -280,7 +280,7 @@
                                         <path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
                                     </svg>
                                 </span>
-                                <span class="nav-link-text">Home</span>
+                                <span class="nav-link-text">首页</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -294,7 +294,7 @@
                                         <circle cx="3.5" cy="10.5" r=".5"/>
                                     </svg>
                                 </span>
-                                <span class="nav-link-text">Food Categories</span>
+                                <span class="nav-link-text">食品类别</span>
                             </a>
                         </li>
                         <li class="nav-item has-submenu">
@@ -305,7 +305,7 @@
                                         <path d="M6 0h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2v-1a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1H4a2 2 0 0 1 2-2z"/>
                                     </svg>
                                 </span>
-                                <span class="nav-link-text">Food Components</span>
+                                <span class="nav-link-text">食品成分</span>
                                 <span class="submenu-arrow"></span>
                             </a>
                         </li>
@@ -316,7 +316,7 @@
                                         <path fill-rule="evenodd" d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2zm1 12h2V2h-2v12zm-3 0V7H7v7h2zm-5 0v-3H2v3h2z"/>
                                     </svg>
                                 </span>
-                                <span class="nav-link-text">Nutrition Charts</span>
+                                <span class="nav-link-text">营养图表</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -326,7 +326,7 @@
                                         <path fill-rule="evenodd" d="M6 1H1v3h5V1zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1zm14 12h-5v3h5v-3zm-5-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-5zM6 8H1v7h5V8zM1 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H1zm14-6h-5v7h5V1zm-5-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1h-5z"/>
                                     </svg>
                                 </span>
-                                <span class="nav-link-text">Personalized Recommendation</span>
+                                <span class="nav-link-text">个性化推荐</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -337,7 +337,7 @@
                                         <path d="M5.255 5.786a.237 .237 0 0 0 .241 .247h.825c.138 0 .248-.113 .266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374 .927-.965 1.371-.673 .489-1.206 1.06-1.168 1.987l.003 .217a.25 .25 0 0 0 .25 .246h.811a.25 .25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655 .59-2.75 2.286zm1.557 5.763c0 .533 .425 .927 1.01 .927 .609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009 .388-1.009 .94z"/>
                                     </svg>
                                 </span>
-                                <span class="nav-link-text">Nutritional Questions</span>
+                                <span class="nav-link-text">营养问答</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -363,7 +363,7 @@
                                             <path fill-rule="evenodd" d="M8 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                                         </svg>
                                     </span>
-                                    <span class="nav-link-text">My Page</span>
+                                    <span class="nav-link-text">个人页面</span>
                                 </a>
                             </li>
                         </ul>
@@ -381,10 +381,10 @@
                         <!-- Page Title -->
                         <div class="text-center mb-8">
                             <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-gray-800 mb-3">
-                                Personalized Food Recommendation
+                                个性化食物推荐
                             </h2>
                             <p class="text-gray-600 max-w-2xl mx-auto">
-                                Fill in the information below to get personalized healthy eating advice. We will provide the most suitable food recommendations based on your physical condition, preferences, and goals.
+                                请填写以下信息以获取个性化的健康饮食建议。我们将根据您的身体状况、偏好和目标提供最合适的食物推荐。
                             </p>
                         </div>
 
@@ -393,7 +393,7 @@
                             <!-- Progress Indicator -->
                             <div class="bg-primary text-white p-4">
                                 <div class="flex justify-between items-center">
-                                    <h3 class="font-semibold">Personal Information Collection</h3>
+                                    <h3 class="font-semibold">个人信息收集</h3>
                                     <div class="flex items-center space-x-1">
                                         <span class="w-3 h-3 rounded-full bg-white"></span>
                                         <span class="w-3 h-3 rounded-full bg-white/50"></span>
@@ -409,49 +409,49 @@
                                 <div class="form-section">
                                     <h4 class="form-section-title">
                                         <i class="fa fa-user-circle-o text-primary mr-2"></i>
-                                        Basic Information
+                                        基本信息
                                     </h4>
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div>
-                                            <label for="age" class="form-label">Age</label>
+                                            <label for="age" class="form-label">年龄</label>
                                             <select id="age" name="age" class="form-select" required>
-                                                <option value="">Please select</option>
-                                                <option value="8">0 - 12 years</option>
-                                                <option value="16">13 - 18 years</option>
-                                                <option value="25">19 - 30 years</option>
-                                                <option value="40">31 - 50 years</option>
-                                                <option value="60">51 years and above</option>
+                                                <option value="">请选择</option>
+                                                <option value="8">0 - 12岁</option>
+                                                <option value="16">13 - 18岁</option>
+                                                <option value="25">19 - 30岁</option>
+                                                <option value="40">31 - 50岁</option>
+                                                <option value="60">51岁以上</option>
                                             </select>
                                         </div>
                                         <div>
-                                            <label for="gender" class="form-label">Gender</label>
+                                            <label for="gender" class="form-label">性别</label>
                                             <select id="gender" name="gender" class="form-select" required>
-                                                <option value="">Please select</option>
-                                                <option value="male">Male</option>
-                                                <option value="female">Female</option>
-                                                <option value="other">Other</option>
+                                                <option value="">请选择</option>
+                                                <option value="male">男性</option>
+                                                <option value="female">女性</option>
+                                                <option value="other">其他</option>
                                             </select>
                                         </div>
                                         <div>
-                                            <label for="height" class="form-label">Height (cm)</label>
+                                            <label for="height" class="form-label">身高 (厘米)</label>
                                             <select id="height" name="height" class="form-select" required>
-                                                <option value="">Please select</option>
-                                                <option value="145">Below 150cm</option>
-                                                <option value="158">150 - 165cm</option>
-                                                <option value="173">166 - 180cm</option>
-                                                <option value="190">181 - 200cm</option>
-                                                <option value="205">Above 200cm</option>
+                                                <option value="">请选择</option>
+                                                <option value="145">150厘米以下</option>
+                                                <option value="158">150 - 165厘米</option>
+                                                <option value="173">166 - 180厘米</option>
+                                                <option value="190">181 - 200厘米</option>
+                                                <option value="205">200厘米以上</option>
                                             </select>
                                         </div>
                                         <div>
-                                            <label for="weight" class="form-label">Weight (kg)</label>
+                                            <label for="weight" class="form-label">体重 (公斤)</label>
                                             <select id="weight" name="weight" class="form-select" required>
-                                                <option value="">Please select</option>
-                                                <option value="35">Below 40kg</option>
-                                                <option value="48">40 - 55kg</option>
-                                                <option value="63">56 - 70kg</option>
-                                                <option value="80">71 - 90kg</option>
-                                                <option value="95">Above 90kg</option>
+                                                <option value="">请选择</option>
+                                                <option value="35">40公斤以下</option>
+                                                <option value="48">40 - 55公斤</option>
+                                                <option value="63">56 - 70公斤</option>
+                                                <option value="80">71 - 90公斤</option>
+                                                <option value="95">90公斤以上</option>
                                             </select>
                                         </div>
                                     </div>
@@ -461,62 +461,62 @@
                                 <div class="form-section">
                                     <h4 class="form-section-title">
                                         <i class="fa fa-medkit text-primary mr-2"></i>
-                                        Health Information
+                                        健康信息
                                     </h4>
                                     <div>
-                                        <label class="form-label">Allergy Information</label>
+                                        <label class="form-label">过敏信息</label>
                                         <div class="checkbox-group">
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="allergy-nuts" name="allergies" value="nuts">
-                                                <label for="allergy-nuts" class="cursor-pointer">Nuts</label>
+                                                <label for="allergy-nuts" class="cursor-pointer">坚果</label>
                                             </div>
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="allergy-dairy" name="allergies" value="dairy">
-                                                <label for="allergy-dairy" class="cursor-pointer">Dairy</label>
+                                                <label for="allergy-dairy" class="cursor-pointer">乳制品</label>
                                             </div>
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="allergy-gluten" name="allergies" value="gluten">
-                                                <label for="allergy-gluten" class="cursor-pointer">Gluten</label>
+                                                <label for="allergy-gluten" class="cursor-pointer">麸质</label>
                                             </div>
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="allergy-seafood" name="allergies" value="seafood">
-                                                <label for="allergy-seafood" class="cursor-pointer">Seafood</label>
+                                                <label for="allergy-seafood" class="cursor-pointer">海鲜</label>
                                             </div>
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="allergy-other" name="allergies" value="other">
-                                                <label for="allergy-other" class="cursor-pointer">Other</label>
+                                                <label for="allergy-other" class="cursor-pointer">其他</label>
                                             </div>
                                         </div>
                                         <div id="allergy-other-container" class="hidden mt-2">
-                                            <input type="text" id="allergy-other-text" name="allergy_other_text" placeholder="Please specify other allergies" class="form-input">
+                                            <input type="text" id="allergy-other-text" name="allergy_other_text" placeholder="请说明其他过敏情况" class="form-input">
                                         </div>
                                     </div>
                                     <div class="mt-4">
-                                        <label class="form-label">Health Conditions</label>
+                                        <label class="form-label">健康状况</label>
                                         <div class="checkbox-group">
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="health-normal" name="health_conditions" value="normal">
-                                                <label for="health-normal" class="cursor-pointer">Healthy, no special conditions</label>
+                                                <label for="health-normal" class="cursor-pointer">健康，无特殊状况</label>
                                             </div>
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="health-diabetes" name="health_conditions" value="diabetes">
-                                                <label for="health-diabetes" class="cursor-pointer">Diabetes</label>
+                                                <label for="health-diabetes" class="cursor-pointer">糖尿病</label>
                                             </div>
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="health-hypertension" name="health_conditions" value="hypertension">
-                                                <label for="health-hypertension" class="cursor-pointer">Hypertension</label>
+                                                <label for="health-hypertension" class="cursor-pointer">高血压</label>
                                             </div>
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="health-heart-disease" name="health_conditions" value="heart_disease">
-                                                <label for="health-heart-disease" class="cursor-pointer">Heart Disease</label>
+                                                <label for="health-heart-disease" class="cursor-pointer">心脏病</label>
                                             </div>
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="health-other" name="health_conditions" value="other">
-                                                <label for="health-other" class="cursor-pointer">Other</label>
+                                                <label for="health-other" class="cursor-pointer">其他</label>
                                             </div>
                                         </div>
                                         <div id="health-other-container" class="hidden mt-2">
-                                            <input type="text" id="health-other-text" name="health_other_text" placeholder="Please specify other health conditions" class="form-input">
+                                            <input type="text" id="health-other-text" name="health_other_text" placeholder="请说明其他健康状况" class="form-input">
                                         </div>
                                     </div>
                                 </div>
@@ -525,98 +525,98 @@
                                 <div class="form-section">
                                     <h4 class="form-section-title">
                                         <i class="fa fa-cutlery text-primary mr-2"></i>
-                                        Dietary Preferences
+                                        饮食偏好
                                     </h4>
                                     <div>
-                                        <label class="form-label">Preferred Foods</label>
+                                        <label class="form-label">偏好食物</label>
                                         <div class="checkbox-group">
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="favorite-meat" name="favorite_foods" value="meat">
-                                                <label for="favorite-meat" class="cursor-pointer">Meat</label>
+                                                <label for="favorite-meat" class="cursor-pointer">肉类</label>
                                             </div>
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="favorite-vegetables" name="favorite_foods" value="vegetables">
-                                                <label for="favorite-vegetables" class="cursor-pointer">Vegetables</label>
+                                                <label for="favorite-vegetables" class="cursor-pointer">蔬菜</label>
                                             </div>
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="favorite-fruits" name="favorite_foods" value="fruits">
-                                                <label for="favorite-fruits" class="cursor-pointer">Fruits</label>
+                                                <label for="favorite-fruits" class="cursor-pointer">水果</label>
                                             </div>
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="favorite-grains" name="favorite_foods" value="grains">
-                                                <label for="favorite-grains" class="cursor-pointer">Grains</label>
+                                                <label for="favorite-grains" class="cursor-pointer">谷物</label>
                                             </div>
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="favorite-snacks" name="favorite_foods" value="snacks">
-                                                <label for="favorite-snacks" class="cursor-pointer">Snacks</label>
+                                                <label for="favorite-snacks" class="cursor-pointer">零食</label>
                                             </div>
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="favorite-other-food" name="favorite_foods" value="other">
-                                                <label for="favorite-other-food" class="cursor-pointer">Other</label>
+                                                <label for="favorite-other-food" class="cursor-pointer">其他</label>
                                             </div>
                                         </div>
                                         <div id="favorite-other-food-container" class="hidden mt-2">
-                                            <input type="text" id="favorite-other-food-text" name="favorite_other_food_text" placeholder="Please specify other preferred foods" class="form-input">
+                                            <input type="text" id="favorite-other-food-text" name="favorite_other_food_text" placeholder="请说明其他偏好食物" class="form-input">
                                         </div>
                                     </div>
                                     <div class="mt-4">
-                                        <label class="form-label">Dietary Restrictions</label>
+                                        <label class="form-label">饮食限制</label>
                                         <div class="checkbox-group">
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="diet-vegetarian" name="diet_restrictions" value="vegetarian">
-                                                <label for="diet-vegetarian" class="cursor-pointer">Vegetarian</label>
+                                                <label for="diet-vegetarian" class="cursor-pointer">素食</label>
                                             </div>
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="diet-vegan" name="diet_restrictions" value="vegan">
-                                                <label for="diet-vegan" class="cursor-pointer">Vegan</label>
+                                                <label for="diet-vegan" class="cursor-pointer">纯素</label>
                                             </div>
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="diet-low-salt" name="diet_restrictions" value="low_salt">
-                                                <label for="diet-low-salt" class="cursor-pointer">Low Salt Diet</label>
+                                                <label for="diet-low-salt" class="cursor-pointer">低盐饮食</label>
                                             </div>
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="diet-low-fat" name="diet_restrictions" value="low_fat">
-                                                <label for="diet-low-fat" class="cursor-pointer">Low Fat Diet</label>
+                                                <label for="diet-low-fat" class="cursor-pointer">低脂饮食</label>
                                             </div>
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="diet-other-restriction" name="diet_restrictions" value="other">
-                                                <label for="diet-other-restriction" class="cursor-pointer">Other</label>
+                                                <label for="diet-other-restriction" class="cursor-pointer">其他</label>
                                             </div>
                                         </div>
                                         <div id="diet-other-restriction-container" class="hidden mt-2">
-                                            <input type="text" id="diet-other-restriction-text" name="diet_other_restriction_text" placeholder="Please specify other dietary restrictions" class="form-input">
+                                            <input type="text" id="diet-other-restriction-text" name="diet_other_restriction_text" placeholder="请说明其他饮食限制" class="form-input">
                                         </div>
                                     </div>
                                     <div class="mt-4">
-                                        <label class="form-label">Taste Preferences</label>
+                                        <label class="form-label">口味偏好</label>
                                         <div class="checkbox-group">
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="taste-sweet" name="taste_preferences" value="sweet">
-                                                <label for="taste-sweet" class="cursor-pointer">Sweet</label>
+                                                <label for="taste-sweet" class="cursor-pointer">甜味</label>
                                             </div>
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="taste-salty" name="taste_preferences" value="salty">
-                                                <label for="taste-salty" class="cursor-pointer">Salty</label>
+                                                <label for="taste-salty" class="cursor-pointer">咸味</label>
                                             </div>
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="taste-sour" name="taste_preferences" value="sour">
-                                                <label for="taste-sour" class="cursor-pointer">Sour</label>
+                                                <label for="taste-sour" class="cursor-pointer">酸味</label>
                                             </div>
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="taste-spicy" name="taste_preferences" value="spicy">
-                                                <label for="taste-spicy" class="cursor-pointer">Spicy</label>
+                                                <label for="taste-spicy" class="cursor-pointer">辣味</label>
                                             </div>
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="taste-bitter" name="taste_preferences" value="bitter">
-                                                <label for="taste-bitter" class="cursor-pointer">Bitter</label>
+                                                <label for="taste-bitter" class="cursor-pointer">苦味</label>
                                             </div>
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="taste-other-taste" name="taste_preferences" value="other">
-                                                <label for="taste-other-taste" class="cursor-pointer">Other</label>
+                                                <label for="taste-other-taste" class="cursor-pointer">其他</label>
                                             </div>
                                         </div>
                                         <div id="taste-other-taste-container" class="hidden mt-2">
-                                            <input type="text" id="taste-other-taste-text" name="taste_other_taste_text" placeholder="Please specify other taste preferences" class="form-input">
+                                            <input type="text" id="taste-other-taste-text" name="taste_other_taste_text" placeholder="请说明其他口味偏好" class="form-input">
                                         </div>
                                     </div>
                                 </div>
@@ -625,54 +625,54 @@
                                 <div class="form-section">
                                     <h4 class="form-section-title">
                                         <i class="fa fa-heartbeat text-primary mr-2"></i>
-                                        Lifestyle
+                                        生活方式
                                     </h4>
                                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div>
-                                            <label for="exercise-frequency" class="form-label">Exercise Frequency</label>
+                                            <label for="exercise-frequency" class="form-label">运动频率</label>
                                             <select id="exercise-frequency" name="exercise_frequency" class="form-select" required>
-                                                <option value="">Please select</option>
-                                                <option value="never">Never</option>
-                                                <option value="rarely">Rarely (1-2 times/week)</option>
-                                                <option value="sometimes">Sometimes (3-4 times/week)</option>
-                                                <option value="often">Often (5-6 times/week)</option>
-                                                <option value="always">Always (every day)</option>
+                                                <option value="">请选择</option>
+                                                <option value="never">从不运动</option>
+                                                <option value="rarely">很少运动 (每周1-2次)</option>
+                                                <option value="sometimes">偶尔运动 (每周3-4次)</option>
+                                                <option value="often">经常运动 (每周5-6次)</option>
+                                                <option value="always">每天运动</option>
                                             </select>
                                         </div>
                                         <div>
-                                            <label for="sleep-hours" class="form-label">Sleep Hours</label>
+                                            <label for="sleep-hours" class="form-label">睡眠时间</label>
                                             <select id="sleep-hours" name="sleep_hours" class="form-select" required>
-                                                <option value="">Please select</option>
-                                                <option value="under_6">Less than 6 hours</option>
-                                                <option value="6_7">6 - 7 hours</option>
-                                                <option value="7_8">7 - 8 hours</option>
-                                                <option value="8_9">8 - 9 hours</option>
-                                                <option value="over_9">More than 9 hours</option>
+                                                <option value="">请选择</option>
+                                                <option value="under_6">少于6小时</option>
+                                                <option value="6_7">6 - 7小时</option>
+                                                <option value="7_8">7 - 8小时</option>
+                                                <option value="8_9">8 - 9小时</option>
+                                                <option value="over_9">超过9小时</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="mt-4">
-                                        <label class="form-label">Health Goals</label>
+                                        <label class="form-label">健康目标</label>
                                         <div class="checkbox-group">
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="health-goal-weight-loss" name="health_goals" value="weight_loss">
-                                                <label for="health-goal-weight-loss" class="cursor-pointer">Weight Loss</label>
+                                                <label for="health-goal-weight-loss" class="cursor-pointer">减重</label>
                                             </div>
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="health-goal-weight-gain" name="health_goals" value="weight_gain">
-                                                <label for="health-goal-weight-gain" class="cursor-pointer">Weight Gain</label>
+                                                <label for="health-goal-weight-gain" class="cursor-pointer">增重</label>
                                             </div>
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="health-goal-improve-health" name="health_goals" value="improve_health">
-                                                <label for="health-goal-improve-health" class="cursor-pointer">Improve Health</label>
+                                                <label for="health-goal-improve-health" class="cursor-pointer">改善健康</label>
                                             </div>
                                             <div class="checkbox-item">
                                                 <input type="checkbox" id="health-goal-other-goal" name="health_goals" value="other">
-                                                <label for="health-goal-other-goal" class="cursor-pointer">Other</label>
+                                                <label for="health-goal-other-goal" class="cursor-pointer">其他</label>
                                             </div>
                                         </div>
                                         <div id="health-goal-other-goal-container" class="hidden mt-2">
-                                            <input type="text" id="health-goal-other-goal-text" name="health_goal_other_text" placeholder="Please specify other health goals" class="form-input">
+                                            <input type="text" id="health-goal-other-goal-text" name="health_goal_other_text" placeholder="请说明其他健康目标" class="form-input">
                                         </div>
                                     </div>
                                 </div>
@@ -681,7 +681,7 @@
                                 <div class="flex justify-center mt-8 mb-6">
                                     <button type="submit" id="submit-button" class="px-8 py-3 bg-primary hover:bg-primary/90 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-1 flex items-center">
                                         <i class="fa fa-leaf mr-2"></i>
-                                        Get Personalized Recommendation
+                                        获取个性化推荐
                                     </button>
                                 </div>
                             </form>
@@ -700,15 +700,15 @@
     {% if recommended_foods is not None %}
         <div class="app-content">
             {% if recommended_foods %}
-                <h3 class="text-xl font-bold mb-4 text-gray-800 text-center">Recommended Foods for You:</h3>
+                <h3 class="text-xl font-bold mb-4 text-gray-800 text-center">为您推荐的食物：</h3>
                 <ul class="list-disc pl-5 text-gray-700 mx-auto max-w-2xl">
                     {% for food in recommended_foods %}
-                        <li>{{ food.Name }} - {{ food.Type }} (Score: {{ food.score|floatformat:2 }})</li>
+                        <li>{{ food.Name }} - {{ food.Type }} (评分: {{ food.score|floatformat:2 }})</li>
                     {% endfor %}
                 </ul>
             {% else %}
                 <div class="text-red-600 font-bold text-center">
-                    No suitable foods found. Try adjusting your preferences or restrictions for more options.
+                    未找到合适的食物。请尝试调整您的偏好或限制条件以获得更多选择。
                 </div>
             {% endif %}
         </div>
